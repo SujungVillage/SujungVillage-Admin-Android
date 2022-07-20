@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/selector_icon_main_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/community"
+        android:enabled="true"
+        android:icon="@drawable/selector_icon_main_community"
+        android:title="Community"/>
+
+    <item
+        android:id="@+id/qna"
+        android:enabled="true"
+        android:icon="@drawable/selector_icon_main_qna"
+        android:title="Q&amp;A"/>
+
+    <item
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:icon="@drawable/selector_icon_main_setting"
+        android:title="Settings" />
+</menu>
