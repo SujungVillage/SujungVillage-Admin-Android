@@ -14,10 +14,16 @@
         android:theme="@style/Theme.SujungVillageAdmin"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".NoticeActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".CommDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CommWriteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

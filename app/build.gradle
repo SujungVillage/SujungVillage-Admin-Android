@@ -48,7 +48,6 @@ dependencies {
     // bottom navigation bar
     implementation 'com.google.android.material:material:1.6.0'
 
-    //lottie
-    def lottieVersion = "3.4.0"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    // lottie img
+    implementation "com.airbnb.android:lottie:5.2.0"
 }
