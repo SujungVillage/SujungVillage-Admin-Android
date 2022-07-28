@@ -43,14 +43,84 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linear_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title">
+
+        <Spinner
+            android:id="@+id/spinner_dormitory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:dropDownWidth="match_parent"
+            android:entries="@array/dormitory"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/btn_dropdown"
+            android:layout_width="11dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/nothing"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_notice_spinner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_notice_write_button"
+        android:layout_marginTop="23dp"
+        android:layout_marginRight="27dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="5.5dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title">
+
+        <ImageView
+            android:id="@+id/img_pencil"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_notice_pencil"/>
+
+        <TextView
+            android:id="@+id/text_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/medium"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/white"
+            android:text="글 작성" />
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_title"
+        app:layout_constraintTop_toBottomOf="@+id/linear_spinner"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
@@ -58,7 +128,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_notice"
@@ -66,33 +137,6 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/listitem_notice_post" />
 
-            <LinearLayout
-                android:id="@+id/linear_page"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="48dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/listitem_notice_page" />
-
-                <ImageButton
-                    android:id="@+id/btn_nextPage"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="@color/nothing"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon_notice_next_page"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
