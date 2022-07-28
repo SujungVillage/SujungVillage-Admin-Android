@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="47dp"
                 android:layout_weight="1"
-                android:entries="@array/comm_dormitory"
+                android:entries="@array/dormitory"
                 android:gravity="center"
                 android:padding="0dp"
                 android:textAlignment="center"
