@@ -90,22 +90,13 @@
                 android:fontFamily="@font/medium"
                 android:textColor="@color/green_100" />
 
-            <TextView
-                android:id="@+id/text_rewards"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="상점 : 12점    |    벌점 : 6점"
-                android:fontFamily="@font/medium"
-                android:textColor="@color/green_100" />
-
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_home"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/style_main_navigation_bar"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
