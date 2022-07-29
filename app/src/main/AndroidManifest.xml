@@ -14,8 +14,15 @@
         android:theme="@style/Theme.SujungVillageAdmin"
         tools:targetApi="31">
         <activity
+            android:name=".NoticeWriteActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:exported="true" />
+        <activity
+            android:name=".RollCallActivity"
+            android:exported="true" />
+        <activity
             android:name=".NoticeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CommDetailActivity"
             android:exported="true" />
