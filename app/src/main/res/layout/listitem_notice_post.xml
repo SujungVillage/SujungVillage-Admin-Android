@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_date"
+            android:id="@+id/text_cal_date"
             android:text="2022.07.08"
             android:textSize="12sp"
             android:layout_marginTop="1dp"
