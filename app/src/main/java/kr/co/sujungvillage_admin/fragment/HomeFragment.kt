@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.co.sujungvillage_admin.AlarmActivity
 import kr.co.sujungvillage_admin.NoticeActivity
 import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.databinding.FragmentHomeBinding
@@ -29,6 +30,11 @@ class HomeFragment : Fragment() {
         // 2. 상벌점 관리 버튼 연결
         // 3. 점호 확인 버튼 연결
         // 4. 재사생 관리 버튼 연결
+        // 5. 알람 버튼 연결
+        binding.btnAlarm.setOnClickListener {
+            var intent = Intent(this.activity, AlarmActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }

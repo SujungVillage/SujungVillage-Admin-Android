@@ -50,4 +50,7 @@ dependencies {
 
     // lottie img
     implementation "com.airbnb.android:lottie:5.2.0"
+
+    // viewpager
+    implementation 'com.google.android.material:material:1.4.0'
 }
