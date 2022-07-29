@@ -14,13 +14,14 @@
         android:background="#F5F5F5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="114dp"
             android:background="@drawable/style_comm_border"
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner_dormitory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -32,12 +33,12 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comm_search"
+                app:layout_constraintTop_toBottomOf="@+id/btn_search"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <ImageButton
-                android:id="@+id/comm_search"
+                android:id="@+id/btn_search"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="47dp"
@@ -45,12 +46,12 @@
                 android:background="@color/nothing"
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_comm_search"
-                app:layout_constraintEnd_toStartOf="@+id/comm_alarm"
+                app:layout_constraintEnd_toStartOf="@+id/btn_alarm"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/comm_alarm"
+                android:id="@+id/btn_alarm"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="47dp"
@@ -79,7 +80,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btn_write"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_gravity="bottom|right"

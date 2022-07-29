@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import kr.co.sujungvillage_admin.CommWriteActivity
+import kr.co.sujungvillage_admin.MainActivity
 import kr.co.sujungvillage_admin.NoticeActivity
+import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.databinding.FragmentCommunityBinding
 
 class CommFragment : Fragment() {
@@ -16,11 +20,12 @@ class CommFragment : Fragment() {
         val binding = FragmentCommunityBinding.inflate(inflater, container, false)
 
         // 글 작성 버튼 연결
-        binding.imageButton3.setOnClickListener {
+        binding.btnWrite.setOnClickListener {
             var intent = Intent(this.activity, CommWriteActivity::class.java)
             startActivity(intent)
         }
-
+        // 기숙사 스피너 연결 및 커스텀
+        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
         return binding.root
     }
 }
