@@ -91,7 +91,7 @@
                 android:paddingVertical="2dp">
 
                 <TextView
-                    android:id="@+id/text_date"
+                    android:id="@+id/textview11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -118,7 +118,7 @@
                 android:paddingVertical="2dp">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/textview12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
