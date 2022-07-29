@@ -27,10 +27,13 @@
         </activity>
         <activity
             android:name=".NoticeWriteActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".RollCallActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AlarmActivity"
             android:exported="true" />
         <activity
             android:name=".NoticeActivity"
@@ -45,5 +48,4 @@
             android:name=".MainActivity"
             android:exported="true" />
     </application>
-
 </manifest>
