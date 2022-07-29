@@ -104,7 +104,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/edit_content"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@drawable/style_comm_write_edittext_border"
