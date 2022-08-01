@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kr.co.sujungvillage_admin.NoticeActivity
 import kr.co.sujungvillage_admin.R
+import kr.co.sujungvillage_admin.RewardActivity
 import kr.co.sujungvillage_admin.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -27,6 +28,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // 2. 상벌점 관리 버튼 연결
+        binding.btnReward.setOnClickListener {
+            var intent = Intent(this.activity, RewardActivity::class.java)
+            startActivity(intent)
+        }
         // 3. 점호 확인 버튼 연결
         // 4. 재사생 관리 버튼 연결
 
