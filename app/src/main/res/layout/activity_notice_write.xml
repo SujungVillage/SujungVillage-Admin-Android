@@ -41,8 +41,10 @@
         android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle">
+        app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/linear"
@@ -163,13 +165,14 @@
                 android:textColorHint="@color/gray_250"
                 android:textSize="12dp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:id="@+id/btn_upload"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:background="@drawable/style_comm_write_submit_border"
                 android:fontFamily="@font/bold"
+                android:gravity="center"
                 android:text="등록"
                 android:textColor="@color/white"
                 android:textSize="16dp"
