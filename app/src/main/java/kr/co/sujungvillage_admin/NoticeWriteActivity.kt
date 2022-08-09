@@ -38,15 +38,6 @@ class NoticeWriteActivity : AppCompatActivity() {
 
         // 기숙사 스피너 연결 및 커스텀
         binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(this, R.array.dormitory, R.layout.spinner_notice_write_dormitory)
-        binding.spinnerDormitory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position) {
-                    // position - 0 : 전체, 1 : 성미료, 2 : 성미관, 3 : 풍림, 4 : 엠시티, 5 : 그레이스, 6 : 이율, 7 : 장수
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) { }
-        }
 
         // 등록 버튼 연결 : 공지사항 API 연결 및 액티비티 종료
         binding.btnUpload.setOnClickListener {
@@ -58,23 +49,16 @@ class NoticeWriteActivity : AppCompatActivity() {
                 Toast.makeText(this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             val title = binding.editTitle.text.toString()
             val content = binding.editContent.text.toString()
-            val dormitory = when (binding.spinnerDormitory.selectedItem) {
-                0 -> "전체"
-                1 -> "성미료"
-                2 -> "성미관"
-                3 -> "풍림"
-                4 -> "엠시티"
-                5 -> "그레이스"
-                6 -> "이율"
-                7 -> "장수"
-                else -> "오류"
-            }
+            var dormitory = binding.spinnerDormitory.selectedItem.toString()
             var noticeInfo = NoticeCreateDTO(title, content, dormitory)
+            Log.d("NOTICE_WRITE_REQUEST", noticeInfo.toString())
 
             RetrofitBuilder.noticeApi.noticeCreate(userNum, noticeInfo).enqueue(object: Callback<NoticeCreateResultDTO> {
                 override fun onResponse(call: Call<NoticeCreateResultDTO>, response: Response<NoticeCreateResultDTO>) {
+                    Log.d("NOTICE_CREATE", "공지사항 작성 요청 성공")
                     Log.d("NOTICE_CREATE", "id : " + response.body()?.id)
                     Log.d("NOTICE_CREATE", "writer : " + response.body()?.writer)
                     Log.d("NOTICE_CREATE", "title : " + response.body()?.title)

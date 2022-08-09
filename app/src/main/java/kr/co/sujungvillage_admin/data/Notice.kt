@@ -8,7 +8,7 @@ data class NoticeRequestResultDTO(
     val id: Long,
     @SerializedName("title")
     val title: String,
-    @SerializedName("dormitoryName")
+    @SerializedName("domitoryName")
     val dormitory: String,
     @SerializedName("regDate")
     val date: String,
@@ -23,7 +23,7 @@ data class NoticeDetailResultDTO(
     val title: String,
     @SerializedName("content")
     val content: String,
-    @SerializedName("dormitoryName")
+    @SerializedName("domitoryName")
     val dormitory: String,
     @SerializedName("regDate")
     val regDate: String,
@@ -36,7 +36,7 @@ data class NoticeCreateDTO(
     val title: String,
     @SerializedName("content")
     val content: String,
-    @SerializedName("dormitoryName")
+    @SerializedName("domitoryName")
     val dormitory: String,
 ): Serializable {}
 
@@ -53,6 +53,6 @@ data class NoticeCreateResultDTO(
     val regDate: String,
     @SerializedName("modDate")
     val modDate: String,
-    @SerializedName("dormitoryName")
+    @SerializedName("domitoryName")
     val dormitory: String,
 ): Serializable {}

@@ -18,7 +18,7 @@ interface NoticeService {
     @GET("/api/common/getDetailedAnnouncement")
     fun noticeDetailRequest(
         @Header("user_id") userId: String,
-        @Query("notice_id") noticeId: Long,
+        @Query("announcementId") noticeId: Long,
     ): Call<NoticeDetailResultDTO>
 
     // 공지사항 작성
