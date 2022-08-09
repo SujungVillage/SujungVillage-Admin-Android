@@ -19,14 +19,18 @@ class NoticeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // ★★★ 로그인 회원 번호 불러오기
+        val userNum = "99990001"
+
         // NoticeActivity에서 공지사항 ID 전달 받기
         val noticeId = intent.getLongExtra("noticeId", -1)
+        Log.d("NOTICE_DETAIL_REQUEST", "noticeId : " + noticeId)
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // 공지사항 상세 조회 API 연결
-        RetrofitBuilder.noticeApi.noticeDetailRequest("20180001", noticeId).enqueue(object: Callback<NoticeDetailResultDTO> {
+        RetrofitBuilder.noticeApi.noticeDetailRequest(userNum, noticeId).enqueue(object: Callback<NoticeDetailResultDTO> {
             override fun onResponse(call: Call<NoticeDetailResultDTO>, response: Response<NoticeDetailResultDTO>) {
                 Log.d("NOTICE_DETAIL_REQUEST", "id : " + response.body()?.id)
                 Log.d("NOTICE_DETAIL_REQUEST", "writer : " + response.body()?.name)

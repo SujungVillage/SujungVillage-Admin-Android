@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                     response.body()?.adminInfo?.dormitory + " 기숙사 " + response.body()?.adminInfo?.description + " 담당"
 
                 // 캘린더 정보 반영
-                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
+                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, binding.calendar.currentDate.month)
                 val todayDecorator = TodayDecorator(this@HomeFragment)
                 binding.calendar.addDecorators(rollcallDecorator, todayDecorator)
             }
@@ -86,7 +86,7 @@ class HomeFragment : Fragment() {
                     Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
 
                     // 캘린더 정보 반영
-                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
+                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, date.month)
                     val todayDecorator = TodayDecorator(this@HomeFragment)
                     binding.calendar.addDecorators(rollcallDecorator, todayDecorator)
                 }
@@ -103,12 +103,13 @@ class HomeFragment : Fragment() {
 }
 
 // 점호일 커스텀 함수
-class RollcallDecorator(context: HomeFragment, days: List<Int>) : DayViewDecorator {
+class RollcallDecorator(context: HomeFragment, days: List<Int>, month:Int) : DayViewDecorator {
     val rollcallDrawable = context.resources.getDrawable(R.drawable.style_home_cal_rollcall)
     val days = days
+    val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return days.contains(day?.day)
+        return days.contains(day?.day) && day?.month == month
     }
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
