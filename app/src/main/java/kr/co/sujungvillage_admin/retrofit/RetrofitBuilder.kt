@@ -2,6 +2,7 @@ package kr.co.sujungvillage_admin.retrofit
 
 import com.google.gson.GsonBuilder
 import kr.co.sujungvillage_admin.BuildConfig.BASE_URL
+import kr.co.sujungvillage_admin.api.CommunityService
 import kr.co.sujungvillage_admin.api.HomeService
 import kr.co.sujungvillage_admin.api.NoticeService
 import retrofit2.Retrofit
@@ -9,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     // 사용할 API 인터페이스 선언
+    var communityApi: CommunityService
     var noticeApi: NoticeService
     var homeApi: HomeService
 
@@ -21,6 +23,7 @@ object RetrofitBuilder {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
+        communityApi = retrofit.create(CommunityService::class.java)
         noticeApi = retrofit.create(NoticeService::class.java)
         homeApi = retrofit.create(HomeService::class.java)
     }
