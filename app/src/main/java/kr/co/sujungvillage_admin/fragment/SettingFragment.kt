@@ -24,7 +24,7 @@ class SettingFragment : Fragment() {
         val binding = FragmentSettingBinding.inflate(inflater, container, false)
 
         //  토큰 불러오기
-        val shared = this.activity?.getSharedPreferences("SujungVillage_admin", Context.MODE_PRIVATE)
+        val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
 
         // 알림 버튼 연결
@@ -41,7 +41,9 @@ class SettingFragment : Fragment() {
 
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.adminInfo?.name
-                binding.textCharge.text = "담당 : " + response.body()?.adminInfo?.dormitory + " " + response.body()?.adminInfo?.description
+                if (response.body()?.adminInfo?.dormitory == "전체" && response.body()?.adminInfo?.description == "전체")
+                    binding.textCharge.text = "담당 : " + response.body()?.adminInfo?.dormitory
+                else binding.textCharge.text = "담당 : " + response.body()?.adminInfo?.dormitory + " " + response.body()?.adminInfo?.description
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {

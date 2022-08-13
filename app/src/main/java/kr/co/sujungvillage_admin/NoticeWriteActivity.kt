@@ -1,5 +1,6 @@
 package kr.co.sujungvillage_admin
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,8 +27,9 @@ class NoticeWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ★★★ 로그인 회원 번호 불러오기
-        val userNum = "99990001"
+        //  토큰 불러오기
+        val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
@@ -56,7 +58,7 @@ class NoticeWriteActivity : AppCompatActivity() {
             var noticeInfo = NoticeCreateDTO(title, content, dormitory)
             Log.d("NOTICE_WRITE_REQUEST", noticeInfo.toString())
 
-            RetrofitBuilder.noticeApi.noticeCreate(userNum, noticeInfo).enqueue(object: Callback<NoticeCreateResultDTO> {
+            RetrofitBuilder.noticeApi.noticeCreate(token, noticeInfo).enqueue(object: Callback<NoticeCreateResultDTO> {
                 override fun onResponse(call: Call<NoticeCreateResultDTO>, response: Response<NoticeCreateResultDTO>) {
                     Log.d("NOTICE_CREATE", "공지사항 작성 요청 성공")
                     Log.d("NOTICE_CREATE", "id : " + response.body()?.id)
@@ -66,6 +68,9 @@ class NoticeWriteActivity : AppCompatActivity() {
                     Log.d("NOTICE_CREATE", "register date : " + response.body()?.regDate)
                     Log.d("NOTICE_CREATE", "modify date : " + response.body()?.modDate)
                     Log.d("NOTICE_CREATE", "dormitory : " + response.body()?.dormitory)
+
+                    Toast.makeText(this@NoticeWriteActivity, "공지사항이 작성되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
                 override fun onFailure(call: Call<NoticeCreateResultDTO>, t: Throwable) {

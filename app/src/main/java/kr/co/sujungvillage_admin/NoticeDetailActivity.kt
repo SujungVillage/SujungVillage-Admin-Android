@@ -1,5 +1,6 @@
 package kr.co.sujungvillage_admin
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,8 +20,9 @@ class NoticeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ★★★ 로그인 회원 번호 불러오기
-        val userNum = "99990001"
+        //  토큰 불러오기
+        val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
 
         // NoticeActivity에서 공지사항 ID 전달 받기
         val noticeId = intent.getLongExtra("noticeId", -1)
@@ -30,10 +32,10 @@ class NoticeDetailActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         // 공지사항 상세 조회 API 연결
-        RetrofitBuilder.noticeApi.noticeDetailRequest(userNum, noticeId).enqueue(object: Callback<NoticeDetailResultDTO> {
+        RetrofitBuilder.noticeApi.noticeDetailRequest(token, noticeId).enqueue(object: Callback<NoticeDetailResultDTO> {
             override fun onResponse(call: Call<NoticeDetailResultDTO>, response: Response<NoticeDetailResultDTO>) {
                 Log.d("NOTICE_DETAIL_REQUEST", "id : " + response.body()?.id)
-                Log.d("NOTICE_DETAIL_REQUEST", "writer : " + response.body()?.name)
+                Log.d("NOTICE_DETAIL_REQUEST", "writer id : " + response.body()?.writerId)
                 Log.d("NOTICE_DETAIL_REQUEST", "title : " + response.body()?.title)
                 Log.d("NOTICE_DETAIL_REQUEST", "content : " + response.body()?.content)
                 Log.d("NOTICE_DETAIL_REQUEST", "dormitory : " + response.body()?.dormitory)

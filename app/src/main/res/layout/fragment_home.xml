@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="2341"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="34sp" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
                 android:fontFamily="@font/medium"
-                android:text="성미관 기숙사"
+                android:text=""
                 android:textColor="@color/green_100" />
 
         </LinearLayout>
@@ -260,7 +260,8 @@
                             android:layout_marginTop="30dp"
                             app:mcv_dateTextAppearance="@style/calendar_date_text_default"
                             app:mcv_headerTextAppearance="@style/calendar_header_text_default"
-                            app:mcv_selectionMode="none"
+                            app:mcv_selectionMode="single"
+                            app:mcv_selectionColor="@color/nothing"
                             app:mcv_weekDayTextAppearance="@style/calendar_week_text_default" />
 
                         <TextView

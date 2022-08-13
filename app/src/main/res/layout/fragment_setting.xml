@@ -70,7 +70,7 @@
                     android:id="@+id/text_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="김수룡"
+                    android:text=""
                     android:textColor="@color/gray_600"
                     android:textSize="20sp"
                     android:fontFamily="@font/semi_bold" />
@@ -106,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="담당 : 성미관"
+                    android:text="담당 : "
                     android:fontFamily="@font/medium" />
             </LinearLayout>
         </LinearLayout>

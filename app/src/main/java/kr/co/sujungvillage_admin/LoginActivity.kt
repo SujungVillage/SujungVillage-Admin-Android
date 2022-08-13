@@ -61,8 +61,9 @@ class LoginActivity : AppCompatActivity() {
 
                     // 기본 정보를 기억하는 경우
                     if (binding.checkAutoLogin.isChecked) {
+                        editor.putBoolean("autoLogin", true)
                         editor.putString("loginID", binding.editId.text.toString())
-                        editor.putString("password", binding.editPassword.text.toString())
+                        editor.putString("loginPassword", binding.editPassword.text.toString())
                     }
                     // 기본 정보를 기억하지 않는 경우
                     else {
