@@ -9,22 +9,23 @@ import retrofit2.http.*
 
 interface NoticeService {
     // 공지사항 리스트 조회
-    @GET("/api/common/getAnnouncementList")
+    @GET("/api/common/announcement/getAnnouncementTitles")
     fun noticeRequest(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
+        @Query("dormitoryName") dormitory: String,
     ): Call<List<NoticeRequestResultDTO>>
 
     // 공지사항 상세 조회
-    @GET("/api/common/getDetailedAnnouncement")
+    @GET("/api/common/announcement/getAnnouncement")
     fun noticeDetailRequest(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Query("announcementId") noticeId: Long,
     ): Call<NoticeDetailResultDTO>
 
     // 공지사항 작성
-    @POST("/api/admin/writeAnnouncement")
+    @POST("/api/admin/announcement/writeAnnouncement")
     fun noticeCreate(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Body noticeInfo: NoticeCreateDTO,
     ): Call<NoticeCreateResultDTO>
 }
