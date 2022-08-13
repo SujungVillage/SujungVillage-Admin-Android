@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="false"
-        android:drawable="@drawable/img_login_check_false"/>
-    <!-- 체크박스 선택 상태 -->
-    <item android:state_checked="true"
-        android:drawable="@drawable/img_login_check_true"/>
-</selector>
