@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface HomeService {
     // 관리자 홈 화면 정보 조회
-    @GET("/api/admin/home_info")
+    @GET("/api/admin/home/getInfo")
     fun homeInfo(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Query("year") year: String,
         @Query("month") month: String,
     ): Call<HomeInfoResultDTO>

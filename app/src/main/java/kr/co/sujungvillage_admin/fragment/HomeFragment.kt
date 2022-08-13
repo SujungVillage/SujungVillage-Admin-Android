@@ -1,5 +1,6 @@
 package kr.co.sujungvillage_admin.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -25,11 +26,15 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
+    var dayRollcall: MutableList<Int>? = mutableListOf()
+    var idRollcall: MutableList<Long>? = mutableListOf()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // ★★★ 재사생 학번 불러오기
-        val userNum = "99990001"
+        //  토큰 불러오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage_admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -54,12 +59,24 @@ class HomeFragment : Fragment() {
         }
         // 4. 재사생 관리 버튼 연결
 
+        // Swipe Refresh 버튼 연결
+
+        // 캘린더 좌우 버튼 연결
+
         // 관리자 홈 화면 정보 조회 API 연결
-        RetrofitBuilder.homeApi.homeInfo(userNum, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object : Callback<HomeInfoResultDTO> {
+        RetrofitBuilder.homeApi.homeInfo(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object : Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("HOME_INFO", "홈 화면 정보 조회 성공")
                 Log.d("HOME_INFO", "user : " + response.body()?.adminInfo.toString())
                 Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
+                Log.e("HOME_INFO", "code : " + response.code().toString())
+                Log.e("HOME_INFO", "message : " + response.message())
+                dayRollcall?.clear()
+                idRollcall?.clear()
+                for (rollcallDay in response.body()?.rollcallDays!!) {
+                    dayRollcall?.add(rollcallDay.day)
+                    idRollcall?.add(rollcallDay.id)
+                }
 
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.adminInfo?.name
@@ -67,7 +84,7 @@ class HomeFragment : Fragment() {
                     response.body()?.adminInfo?.dormitory + " 기숙사 " + response.body()?.adminInfo?.description + " 담당"
 
                 // 캘린더 정보 반영
-                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, binding.calendar.currentDate.month)
+                val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall!!, binding.calendar.currentDate.month)
                 val todayDecorator = TodayDecorator(this@HomeFragment)
                 binding.calendar.addDecorators(rollcallDecorator, todayDecorator)
             }
@@ -80,13 +97,13 @@ class HomeFragment : Fragment() {
 
         // 캘린더 좌우 버튼 연결
         binding.calendar.setOnMonthChangedListener { widget, date ->
-            RetrofitBuilder.homeApi.homeInfo(userNum, date.year.toString(), date.month.toString()).enqueue(object : Callback<HomeInfoResultDTO> {
+            RetrofitBuilder.homeApi.homeInfo(token, date.year.toString(), date.month.toString()).enqueue(object : Callback<HomeInfoResultDTO> {
                 override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                     Log.d("HOME_INFO", "캘린더 정보 조회 성공")
                     Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
 
                     // 캘린더 정보 반영
-                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, date.month)
+                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall!!, date.month)
                     val todayDecorator = TodayDecorator(this@HomeFragment)
                     binding.calendar.addDecorators(rollcallDecorator, todayDecorator)
                 }
@@ -102,18 +119,16 @@ class HomeFragment : Fragment() {
     }
 }
 
-// 점호일 커스텀 함수
-class RollcallDecorator(context: HomeFragment, days: List<Int>, month:Int) : DayViewDecorator {
-    val rollcallDrawable = context.resources.getDrawable(R.drawable.style_home_cal_rollcall)
-    val days = days
-    val month = month
+// 디폴트 커스텀 함수
+class DefaultDecorator(context: HomeFragment): DayViewDecorator {
+    val defaultDrawable = context.resources.getDrawable(R.drawable.style_home_cal_default)
 
-    override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return days.contains(day?.day) && day?.month == month
+    override fun shouldDecorate(day: CalendarDay?): Boolean {
+        return true
     }
 
-    override fun decorate(view: DayViewFacade?) { // 커스텀 설정
-        view?.setBackgroundDrawable(rollcallDrawable)
+    override fun decorate(view: DayViewFacade?) {
+        view?.setBackgroundDrawable(defaultDrawable)
     }
 }
 
@@ -125,5 +140,20 @@ class TodayDecorator(context: HomeFragment) : DayViewDecorator {
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
         view?.addSpan(object : ForegroundColorSpan(Color.parseColor("#FF9AE000")) {})
+    }
+}
+
+// 점호일 커스텀 함수
+class RollcallDecorator(context: HomeFragment, days: MutableList<Int>, month:Int) : DayViewDecorator {
+    val rollcallDrawable = context.resources.getDrawable(R.drawable.style_home_cal_rollcall)
+    val days = days
+    val month = month
+
+    override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
+        return days.contains(day?.day) && day?.month == month
+    }
+
+    override fun decorate(view: DayViewFacade?) { // 커스텀 설정
+        view?.setBackgroundDrawable(rollcallDrawable)
     }
 }

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame"
-    android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".fragment.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,10 @@
             android:id="@+id/img_wave"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="-30dp"
-            android:layout_marginBottom="-45dp"
             android:layout_marginLeft="-22dp"
+            android:layout_marginTop="-30dp"
             android:layout_marginRight="-7dp"
+            android:layout_marginBottom="-45dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/layout_home"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +75,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
+                    android:fontFamily="@font/bold"
                     android:text="님 반갑습니다!"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/bold"
                     android:textSize="22sp" />
             </LinearLayout>
 
@@ -86,8 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:text="성미관 기숙사"
                 android:fontFamily="@font/medium"
+                android:text="성미관 기숙사"
                 android:textColor="@color/green_100" />
 
         </LinearLayout>
@@ -104,167 +104,177 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_userInfo">
 
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" >
 
-                <LinearLayout
-                    android:id="@+id/linear_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
-                        android:id="@+id/linear_menu"
+                        android:id="@+id/linear_home"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="28dp"
-                        android:layout_marginTop="61dp"
-                        android:layout_marginRight="28dp"
-                        android:orientation="horizontal">
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                        <!-- 공지사항 버튼 -->
                         <LinearLayout
-                            android:id="@+id/linear_notice"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/linear_menu"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_marginLeft="28dp"
+                            android:layout_marginTop="61dp"
+                            android:layout_marginRight="28dp"
+                            android:orientation="horizontal">
 
-                            <ImageButton
-                                android:id="@+id/btn_notice"
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:background="@color/nothing"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/img_home_notice"
-                                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-                            <TextView
-                                android:id="@+id/text_notice"
+                            <!-- 공지사항 버튼 -->
+                            <LinearLayout
+                                android:id="@+id/linear_notice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="공지사항"
-                                android:fontFamily="@font/medium"
-                                android:textSize="11sp" />
-                        </LinearLayout>
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                        <!-- 상벌점 관리 버튼 -->
-                        <LinearLayout
-                            android:id="@+id/linear_reward"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                                <ImageButton
+                                    android:id="@+id/btn_notice"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:background="@color/nothing"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/img_home_notice"
+                                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-                            <ImageButton
-                                android:id="@+id/btn_reward"
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:background="@color/nothing"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/img_home_reward"
-                                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                                <TextView
+                                    android:id="@+id/text_notice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/medium"
+                                    android:text="공지사항"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/text_reward"
+                            <!-- 상벌점 관리 버튼 -->
+                            <LinearLayout
+                                android:id="@+id/linear_reward"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="상벌점 관리"
-                                android:fontFamily="@font/medium"
-                                android:textSize="11sp" />
-                        </LinearLayout>
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                        <!-- 점호 확인 버튼 -->
-                        <LinearLayout
-                            android:id="@+id/linear_rollcall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                                <ImageButton
+                                    android:id="@+id/btn_reward"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:background="@color/nothing"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/img_home_reward"
+                                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-                            <ImageButton
-                                android:id="@+id/btn_rollcall"
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:background="@color/nothing"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/img_home_rollcall"
-                                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                                <TextView
+                                    android:id="@+id/text_reward"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/medium"
+                                    android:text="상벌점 관리"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/text_rollcall"
+                            <!-- 점호 확인 버튼 -->
+                            <LinearLayout
+                                android:id="@+id/linear_rollcall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="점호 확인"
-                                android:fontFamily="@font/medium"
-                                android:textSize="11sp" />
-                        </LinearLayout>
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                        <!-- 재사생 관리 버튼 -->
-                        <LinearLayout
-                            android:id="@+id/linear_studentManage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                                <ImageButton
+                                    android:id="@+id/btn_rollcall"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:background="@color/nothing"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/img_home_rollcall"
+                                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-                            <ImageButton
-                                android:id="@+id/btn_studentManage"
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:background="@color/nothing"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/img_home_student_manage"
-                                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                                <TextView
+                                    android:id="@+id/text_rollcall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/medium"
+                                    android:text="점호 확인"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/text_studentManage"
+                            <!-- 재사생 관리 버튼 -->
+                            <LinearLayout
+                                android:id="@+id/linear_studentManage"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="재사생 관리"
-                                android:fontFamily="@font/medium"
-                                android:textSize="11sp" />
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <ImageButton
+                                    android:id="@+id/btn_studentManage"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:background="@color/nothing"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/img_home_student_manage"
+                                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                                <TextView
+                                    android:id="@+id/text_studentManage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/medium"
+                                    android:text="재사생 관리"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
                         </LinearLayout>
+
+                        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                            android:id="@+id/calendar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="30dp"
+                            app:mcv_dateTextAppearance="@style/calendar_date_text_default"
+                            app:mcv_headerTextAppearance="@style/calendar_header_text_default"
+                            app:mcv_selectionMode="none"
+                            app:mcv_weekDayTextAppearance="@style/calendar_week_text_default" />
+
+                        <TextView
+                            android:id="@+id/text_contacts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-10dp"
+                            android:layout_marginBottom="66dp"
+                            android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000"
+                            android:textColor="@color/gray_200"
+                            android:textSize="10sp" />
                     </LinearLayout>
-
-                    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                        android:id="@+id/calendar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="30dp"
-                        android:layout_marginTop="30dp"
-                        app:mcv_dateTextAppearance="@style/calendar_date_text_default"
-                        app:mcv_headerTextAppearance="@style/calendar_header_text_default"
-                        app:mcv_weekDayTextAppearance="@style/calendar_week_text_default"
-                        app:mcv_selectionMode="none" />
-
-                    <TextView
-                        android:id="@+id/text_contacts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-10dp"
-                        android:layout_marginBottom="66dp"
-                        android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000"
-                        android:textColor="@color/gray_200"
-                        android:textSize="10sp" />
-                </LinearLayout>
-            </ScrollView>
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
