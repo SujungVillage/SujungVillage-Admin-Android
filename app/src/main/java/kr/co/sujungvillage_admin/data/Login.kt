@@ -8,6 +8,8 @@ data class LoginDTO(
     val id: String,
     @SerializedName("password")
     val password: String,
+    @SerializedName("fcm_token")
+    val fcm: String,
 ): Serializable {}
 
 data class LoginResultDTO(

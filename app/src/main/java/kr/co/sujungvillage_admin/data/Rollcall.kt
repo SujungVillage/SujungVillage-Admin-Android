@@ -15,11 +15,9 @@ data class RollcallGetDateResultDTO(
 ): Serializable {}
 
 data class RollcallCreateDTO(
-    @SerializedName("date")
-    val date: String,
-    @SerializedName("startTime")
+    @SerializedName("startDateTime")
     val start: String,
-    @SerializedName("endTime")
+    @SerializedName("endDateTime")
     val end: String,
     @SerializedName("dormitoryName")
     val dormitory: String,
@@ -34,4 +32,25 @@ data class RollcallCreateResultDTO(
     val end: String,
     @SerializedName("dormitoryName")
     val dormitory: String,
+): Serializable {}
+
+data class RollcallGetListResultDTO(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("userId")
+    val userId: String,
+    @SerializedName("userName")
+    val userName: String,
+    @SerializedName("dormitoryName")
+    val dormitory: String,
+    @SerializedName("detailedAddress")
+    val address: String,
+    @SerializedName("image")
+    val image: ByteArray,
+    @SerializedName("location")
+    val location: String,
+    @SerializedName("rollcallDateTime")
+    val date: String,
+    @SerializedName("state")
+    val state: String,
 ): Serializable {}

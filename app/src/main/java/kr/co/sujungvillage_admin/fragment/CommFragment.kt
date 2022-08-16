@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage_admin.*
-import kr.co.sujungvillage_admin.adapter.commAdapter
+import kr.co.sujungvillage_admin.adapter.CommAdapter
 import kr.co.sujungvillage_admin.data.CommDTO
 import kr.co.sujungvillage_admin.databinding.FragmentCommBinding
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
@@ -49,7 +48,7 @@ class CommFragment : Fragment() {
                     var comm=CommDTO(post.id,post.title,post.dormitory,post.regDate)
                     commList.add(comm)
                 }
-                val adapter= commAdapter()
+                val adapter= CommAdapter()
                 adapter.commList=commList
                 binding.recycleComm.adapter=adapter
                 binding.recycleComm.layoutManager=
