@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.CommFragment">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F5F5F5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:background="@drawable/style_comm_border"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_dormitory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="47dp"
+                android:background="@null"
+                android:entries="@array/dormitory"
+                android:gravity="center"
+                android:paddingRight="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_search"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="-20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_comm_write_spinner_btn"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_dormitory"
+                app:layout_constraintEnd_toEndOf="@+id/spinner_dormitory"
+                app:layout_constraintTop_toTopOf="@id/spinner_dormitory" />
+
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/nothing"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_comm_search"
+                app:layout_constraintEnd_toStartOf="@+id/btn_alarm"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/nothing"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_delete"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/btn_alarm"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            <ImageButton
+                android:id="@+id/btn_alarm"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/nothing"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_main_alarm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="17dp"
+                android:background="@drawable/style_comm_search"
+                android:ems="10"
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:hint="검색어를 입력하세요."
+                android:textColorHint="@color/gray_350"
+                android:paddingHorizontal="12dp"
+                android:textColor="@color/primary"
+                android:textSize="13dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@id/btn_delete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_exist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="작성된 게시글이 없습니다."
+            android:visibility="gone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/comm_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/linear_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_comm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="80dp"
+                tools:listitem="@layout/listitem_comm" />
+            </LinearLayout>
+        </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_write"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/style_comm_write_border"
+        android:padding="13dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_comm_write"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+</FrameLayout>

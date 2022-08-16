@@ -1,11 +1,21 @@
 package kr.co.sujungvillage_admin
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import kr.co.sujungvillage_admin.base.hideKeyboard
+import kr.co.sujungvillage_admin.data.CommWriteDTO
+import kr.co.sujungvillage_admin.data.CommWriteResultDTO
 import kr.co.sujungvillage_admin.databinding.ActivityCommWriteBinding
+import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommWriteActivity : AppCompatActivity() {
 
@@ -15,18 +25,55 @@ class CommWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
+
+
+        // 키보드 내리기
+        binding.layout.setOnClickListener { this.hideKeyboard() }
+        binding.linear.setOnClickListener { this.hideKeyboard() }
+        binding.linearInfo.setOnClickListener { this.hideKeyboard() }
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener{ finish() }
-        // 기숙사 스피너 연결 및 커스텀
-        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(this, R.array.dormitory, R.layout.spinner_notice_write_dormitory)
-        binding.spinnerDormitory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position) {
-                    // position - 0 : 전체, 1 : 성미료, 2 : 성미관, 3 : 풍림, 4 : 엠시티, 5 : 그레이스, 6 : 이율, 7 : 장수
+
+        //등록 버튼
+        binding.btnUpload.setOnClickListener{
+
+            //버튼 클릭시 제목과 내용 받아오기.
+            val title= binding.editTitle.text.toString().trim()//앞뒤 공백 제거
+            val content=binding.editContent.text.toString().trim()//앞뒤 공백 제거
+
+            //내용이 null인지 확인 필요
+            if(title.isEmpty()){
+                if(content.isEmpty()){
+                    Toast.makeText(this,"제목과 내용을 입력하세요. ${title}, ${content}", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(this,"제목을 입력하세요. ${title}, ${content}", Toast.LENGTH_SHORT).show()
                 }
             }
+            else{
+                if(content.isEmpty()){
+                    Toast.makeText(this,"내용을 입력하세요. ${title}, ${content}", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    //서버에 보내기
+                    val commWriteInfo= CommWriteDTO(title,content)
+                    RetrofitBuilder.communityApi.commWrite(token,commWriteInfo).enqueue(object:
+                        Callback<CommWriteResultDTO> {
+                        override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
+                            Log.d("COMM_WRITE", response.body().toString())
+                            setResult(RESULT_OK)
+                            finish()
+                        }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) { }
+                        override fun onFailure(call: Call<CommWriteResultDTO>, t: Throwable) {
+                            Log.d("COMMW_RITE",t.message.toString())
+                        }
+                    })
+                }
+            }
         }
     }
 }

@@ -85,13 +85,13 @@
         android:id="@+id/btn_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_notice_write_button"
         android:layout_marginTop="23dp"
         android:layout_marginRight="27dp"
+        android:background="@drawable/style_notice_write_button"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="7dp"
         android:paddingVertical="5.5dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_title">
 
@@ -100,43 +100,63 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_notice_pencil"/>
+            android:src="@drawable/icon_notice_pencil" />
 
         <TextView
             android:id="@+id/text_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/medium"
             android:layout_marginLeft="4dp"
-            android:textColor="@color/white"
-            android:text="글 작성" />
+            android:fontFamily="@font/medium"
+            android:text="글 작성"
+            android:textColor="@color/white" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scroll"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_spinner"
-        tools:ignore="SpeakableTextPresentCheck">
+        app:layout_constraintTop_toBottomOf="@id/linear_spinner">
 
-        <LinearLayout
-            android:id="@+id/linear_notice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="50dp">
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_spinner"
+            tools:ignore="SpeakableTextPresentCheck">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_notice"
+            <LinearLayout
+                android:id="@+id/linear_notice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/listitem_notice_post" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="50dp">
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/text_none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:text="작성된 공지사항이 없습니다."
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/listitem_notice_post" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

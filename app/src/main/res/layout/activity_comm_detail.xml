@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CommDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -37,19 +39,51 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp">
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
         >
 
         <LinearLayout
+            android:id="@+id/linear_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_admin"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="9dp"
+                android:background="@drawable/style_comm_listitem_admin_border"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="관리자"
+                android:textColor="#ffffff"
+                android:textSize="10dp"
+                android:visibility="gone"
+                android:fontFamily="@font/medium"
+                android:layout_gravity="center" />
             <TextView
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
@@ -57,9 +91,8 @@
                 android:text="근데 오늘 4층 왜이리 시끄러워?"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:fontFamily="@font/medium"
-                android:paddingHorizontal="40dp" />
-
+                android:fontFamily="@font/medium" />
+        </LinearLayout>
             <TextView
                 android:id="@+id/text_cal_date"
                 android:layout_width="match_parent"
@@ -82,6 +115,7 @@
                 android:paddingHorizontal="40dp" />
 
             <LinearLayout
+                android:id="@+id/linear_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
@@ -106,7 +140,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
                     android:text="0"
                     android:textSize="12dp"
                     android:fontFamily="@font/regular"
@@ -118,29 +151,33 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
+                <TextView
                     android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:backgroundTint="#D9D9D9"
+                    android:background="#FFD9D9D9"
                     android:fontFamily="@font/regular"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:padding="1dp"
                     android:text="삭제하기"
-                    android:textColor="@color/white"
                     android:textSize="11dp"
+                    android:visibility="invisible"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/listitem_comm_detail"
                 />
-
+            </RelativeLayout>
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="match_parent"
@@ -148,33 +185,38 @@
                 android:text="댓글 달기"
                 android:layout_marginTop="19dp"
                 android:textColor="@color/primary"
-                android:textSize="13dp"
                 android:fontFamily="@font/medium"
                 android:paddingHorizontal="40dp" />
 
             <LinearLayout
+                android:id="@+id/linear_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="19dp"
-                android:layout_marginBottom="19dp"
-                android:paddingHorizontal="40dp">
+                android:layout_marginBottom="80dp"
+                android:paddingHorizontal="25dp">
 
 
                 <EditText
                     android:id="@+id/edit_comment"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/style_comm_detail_write_border"
-                    android:gravity="center"
-                    android:inputType="textPersonName" />
+                    android:fontFamily="@font/light"
+                    android:gravity="center_vertical"
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="#FF111111"
+                    android:textSize="12dp"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"  />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_comment_submit"
                     android:layout_width="38dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0"
                     android:background="@drawable/style_comm_detail_write_button"
@@ -185,12 +227,11 @@
                     android:text="등록"
                     android:textColor="@color/white"
                     android:textSize="12dp"
-                    android:fontFamily="@font/semi_bold"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"/>
             </LinearLayout>
 
         </LinearLayout>
-
-
     </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

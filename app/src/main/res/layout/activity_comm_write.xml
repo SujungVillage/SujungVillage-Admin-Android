@@ -59,63 +59,10 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/linear_dormitory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="38dp"
-                    android:gravity="right"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/text_dormitory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
-                        android:text="게시판 선택"
-                        android:textColor="@color/black_900"
-                        android:textSize="14sp" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/linear_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_dormitory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:entries="@array/dormitory"
-                            android:gravity="right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                        <ImageView
-                            android:id="@+id/btn_spinner"
-                            android:layout_width="11dp"
-                            android:layout_height="15dp"
-                            android:background="@color/nothing"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/icon_notice_spinner"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/linear_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="53dp"
+                    android:layout_marginHorizontal="45dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -141,6 +88,7 @@
                         android:textColor="@color/gray_600"
                         android:textColorHint="@color/gray_250"
                         android:textSize="12sp"
+                        android:maxLength="30"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>
@@ -157,7 +105,7 @@
                 android:gravity="top"
                 android:hint="내용을 입력해주세요."
                 android:inputType="textMultiLine"
-                android:maxLines="2000"
+                android:maxLength="2000"
                 android:padding="27dp"
                 android:textColor="@color/gray_600"
                 android:textColorHint="@color/gray_250"
