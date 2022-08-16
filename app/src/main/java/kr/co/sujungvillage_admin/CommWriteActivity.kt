@@ -1,5 +1,6 @@
 package kr.co.sujungvillage_admin
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import kr.co.sujungvillage_admin.base.hideKeyboard
 import kr.co.sujungvillage_admin.data.CommWriteDTO
 import kr.co.sujungvillage_admin.data.CommWriteResultDTO
 import kr.co.sujungvillage_admin.databinding.ActivityCommWriteBinding
@@ -22,8 +24,16 @@ class CommWriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val studentNum="20180001"
 
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
+
+
+        // 키보드 내리기
+        binding.layout.setOnClickListener { this.hideKeyboard() }
+        binding.linear.setOnClickListener { this.hideKeyboard() }
+        binding.linearInfo.setOnClickListener { this.hideKeyboard() }
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener{ finish() }
 
@@ -50,10 +60,11 @@ class CommWriteActivity : AppCompatActivity() {
                 else{
                     //서버에 보내기
                     val commWriteInfo= CommWriteDTO(title,content)
-                    RetrofitBuilder.communityApi.commWrite(studentNum,commWriteInfo).enqueue(object:
+                    RetrofitBuilder.communityApi.commWrite(token,commWriteInfo).enqueue(object:
                         Callback<CommWriteResultDTO> {
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
                             Log.d("COMM_WRITE", response.body().toString())
+                            setResult(RESULT_OK)
                             finish()
                         }
 
