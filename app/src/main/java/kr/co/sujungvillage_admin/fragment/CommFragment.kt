@@ -1,60 +1,69 @@
 package kr.co.sujungvillage_admin.fragment
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.sujungvillage_admin.R
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import kr.co.sujungvillage_admin.*
+import kr.co.sujungvillage_admin.adapter.commAdapter
+import kr.co.sujungvillage_admin.data.CommDTO
+import kr.co.sujungvillage_admin.databinding.FragmentCommBinding
+import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CommunityFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CommFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentCommBinding.inflate(inflater, container, false)
+
+        // 기숙사 스피너 연결 및 커스텀
+        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
+
+        // 알림 버튼 연결
+        binding.btnAlarm.setOnClickListener {
+            var intent = Intent(this.activity, AlarmActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_community, container, false)
-    }
+        // 글 작성 버튼 연결
+        binding.btnWrite.setOnClickListener {
+            var intent = Intent(this.activity, CommWriteActivity::class.java)
+            startActivity(intent)
+        }
+        val studentNum="20180001"
+        RetrofitBuilder.communityApi.comm(studentNum).enqueue(object: Callback<List<CommDTO>> {
+            override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
+                if(response.body()?.size==0){
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CommunityFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CommFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
                 }
+                val commList:MutableList<CommDTO> = mutableListOf()
+                for(post in response.body()!!){
+                    var comm=CommDTO(post.id,post.title,post.dormitory,post.regDate)
+                    commList.add(comm)
+                }
+                val adapter= commAdapter()
+                adapter.commList=commList
+                binding.recycleComm.adapter=adapter
+                binding.recycleComm.layoutManager=
+                    LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
+                Log.d("COMM_FRAG", response.body().toString())
             }
+
+            override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
+                Log.d("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
+
+            }
+
+        })
+
+        return binding.root
     }
 }

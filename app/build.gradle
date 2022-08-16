@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 32
 
@@ -18,6 +21,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // local variables
+        buildConfigField "String", "BASE_URL", properties['base_url']
     }
 
     buildTypes {
@@ -50,4 +56,19 @@ dependencies {
 
     // lottie img
     implementation "com.airbnb.android:lottie:5.2.0"
+
+    // viewpager
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' // 레트로핏 설치 (필수)
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // 컨버터 (선택)
+    implementation 'com.google.code.gson:gson:2.9.1'  //GSON (선택)
+
+    // material-calendarview
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
+
+    // swipe refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

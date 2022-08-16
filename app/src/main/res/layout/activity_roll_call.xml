@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RollCallActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:background="@drawable/style_rollcall_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/nothing"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+        <TextView
+            android:id="@+id/text_toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="점호 확인"
+            android:textSize="20dp"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"/>
+
+
+        <ImageButton
+            android:id="@+id/btn_date_left"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="18dp"
+            android:background="@color/nothing"
+            app:layout_constraintEnd_toStartOf="@+id/text_cal_date"
+            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
+            app:srcCompat="@drawable/icon_rollcall_left"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/text_cal_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="2022.07.01"
+            android:textSize="14dp"
+            android:fontFamily="@font/medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#434343"
+            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle" />
+
+        <ImageButton
+            android:id="@+id/btn_date_right"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="22dp"
+            android:background="@color/nothing"
+            app:layout_constraintStart_toEndOf="@+id/text_cal_date"
+            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
+            app:srcCompat="@drawable/icon_rollcall_right"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_reject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_rollcall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/listitem_rollcall"/>
+    </ScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_reject"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:background="@drawable/style_rollclall_button_border"
+        android:text="반려"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:fontFamily="@font/bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
