@@ -24,6 +24,7 @@ import kr.co.sujungvillage_admin.RollCallActivity
 import kr.co.sujungvillage_admin.data.RollcallCreateDTO
 import kr.co.sujungvillage_admin.data.RollcallCreateResultDTO
 import kr.co.sujungvillage_admin.data.RollcallGetDateResultDTO
+import kr.co.sujungvillage_admin.RewardActivity
 import kr.co.sujungvillage_admin.databinding.FragmentHomeBinding
 import kr.co.sujungvillage_admin.retrofit.HomeInfoResultDTO
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
@@ -60,6 +61,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // 2. 상벌점 관리 버튼 연결
+        binding.btnReward.setOnClickListener {
+            var intent = Intent(this.activity, RewardActivity::class.java)
+            startActivity(intent)
+        }
         // 3. 점호 확인 버튼 연결
         binding.btnRollcall.setOnClickListener {
             var intent = Intent(this.activity, RollCallActivity::class.java)
