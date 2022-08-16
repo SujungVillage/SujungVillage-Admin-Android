@@ -16,8 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".NoticeDetailActivity"
-            android:exported="true"
-            />
+            android:exported="true" />
         <activity
             android:name=".RewardActivity"
             android:exported="true" />
