@@ -17,10 +17,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import kr.co.sujungvillage_admin.AlarmActivity
-import kr.co.sujungvillage_admin.NoticeActivity
-import kr.co.sujungvillage_admin.R
-import kr.co.sujungvillage_admin.RollCallActivity
+import kr.co.sujungvillage_admin.*
 import kr.co.sujungvillage_admin.data.RollcallCreateDTO
 import kr.co.sujungvillage_admin.data.RollcallCreateResultDTO
 import kr.co.sujungvillage_admin.data.RollcallGetDateResultDTO
@@ -60,6 +57,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // 2. 상벌점 관리 버튼 연결
+        binding.btnReward.setOnClickListener {
+            var intent = Intent(this.activity, RewardActivity::class.java)
+            startActivity(intent)
+        }
         // 3. 점호 확인 버튼 연결
         binding.btnRollcall.setOnClickListener {
             var intent = Intent(this.activity, RollCallActivity::class.java)

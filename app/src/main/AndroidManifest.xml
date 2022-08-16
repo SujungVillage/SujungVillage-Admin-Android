@@ -53,6 +53,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".RewardActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
