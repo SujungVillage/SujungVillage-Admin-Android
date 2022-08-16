@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".QnaDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/nothing"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/reward_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:text="Q &amp; A"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="26dp">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/medium"
+                        android:text="층간소음 문제"
+                        android:textColor="#FF111111"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="3dp"
+                        android:text="2022/07/13 20:34"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/light"
+                        android:textColor="#FF989898"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+                    <TextView
+                        android:id="@+id/text_writer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:text="작성자 : 익명"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/light"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_date" />
+
+                    <TextView
+                        android:id="@+id/text_content"
+                        android:layout_width="323dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="41dp"
+                        android:layout_marginTop="20dp"
+                        android:text="403호가 매일 밤마다 쿵쿵 뛰는 소리가 너무 심합니다.. 저번에 쪽지도 한 번 붙여봤는데 하루 이틀만 조용하더 니 지금 또 시끄럽습니다.. 403호에게 따로 주의주셨으 면 좋겠습니다."
+                        android:textColor="#111111"
+                        android:fontFamily="@font/light"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_writer" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF5DA"
+                    android:paddingBottom="26dp">
+
+                    <TextView
+                        android:id="@+id/text_admin_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/medium"
+                        android:text="관리자 답변"
+                        android:textColor="@color/primary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_answerDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="3dp"
+                        android:text="2022/07/14  10:22"
+                        android:fontFamily="@font/light"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_admin_answer" />
+
+                    <TextView
+                        android:id="@+id/text_answer"
+                        android:layout_width="323dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/light"
+                        android:text="안녕하세요 김수룡 학생 :)\n403호 층간소음 문제 때문에 많이 스트레스 받으셨을 것 같습니다. 안 그래도 다른 학생들도 층간소음 문제로 많은 스트레스를 받고 있어, 따로 403호 학생들과 상담을 하기 로 했습니다. 만약 상담 이후에도 지속적인 층간소음이 발 생한다면, 벌점 부과 조치를 하겠습니다.\n감사합니다. "
+                        android:textColor="#111111"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_answerDate" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>

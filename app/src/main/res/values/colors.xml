@@ -10,7 +10,7 @@
 
     <!-- user-defined colors -->
     <color name="primary">#FF9AE000</color>
-    <color name="p_liight">#FFD9F17B</color>
+    <color name="p_light">#FFD9F17B</color>
     <color name="p_dark">#FF567C00</color>
 
     <color name="green_100">#FFFFEEBD</color>

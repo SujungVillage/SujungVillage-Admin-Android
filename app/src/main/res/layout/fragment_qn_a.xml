@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.QnAFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="QnA fragment" />
+        android:orientation="vertical"
+        android:background="@color/white">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/style_qna_tab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar"
+            app:tabIndicatorColor="@color/p_light"
+            app:tabIndicator="@drawable/style_qna_indicator"
+            app:tabIndicatorHeight="6dp"
+            app:tabSelectedTextColor="@color/p_light"
+            app:tabTextColor="#FF6A6A6A"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+        <!--app:tabTextAppearance="@style/qna_tab_text"-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:background="@drawable/style_comm_border"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="47dp"
+                android:fontFamily="@font/semi_bold"
+                android:gravity="center"
+                android:text="Q &amp; A"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/btn_alarm"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/nothing"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_main_alarm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
