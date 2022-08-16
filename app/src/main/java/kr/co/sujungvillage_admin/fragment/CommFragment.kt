@@ -104,7 +104,7 @@ class CommFragment : Fragment() {
         dormitory = binding.spinnerDormitory.getSelectedItem().toString()
         var data=listOf("전체","성미료","성미관","풍림","엠시티","그레이스","이율","장수","운정빌")
         binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
-        binding.spinnerDormitory.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+        binding.spinnerDormitory.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 dormitory=data.get(p2)
                 Log.d("COMM_FRAG",dormitory)
@@ -152,7 +152,7 @@ class CommFragment : Fragment() {
                     var comm=CommDTO(post.id,post.title,post.content,post.writerId,post.regDate,post.numOfComments)
                     commList.add(comm)
                 }
-                val adapter=CommAdapter()
+                val adapter = CommAdapter()
                 adapter.commList=commList
                 binding.recycleComm.adapter=adapter
                 binding.recycleComm.layoutManager=LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
