@@ -2,141 +2,72 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/style_rollcall_detail_border">
+    android:background="@drawable/style_rollcall_detail_border"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="38dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/img_rollcall"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_login_logo"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingHorizontal="38dp"
-        android:paddingVertical="20dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_weight="0"
-            tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="15dp"
+        android:text="이름 : 김수룡"
+        android:textSize="12sp"
+        android:fontFamily="@font/regular"
+        android:textColor="#FF000000"
+        app:layout_constraintStart_toEndOf="@id/img_rollcall"
+        app:layout_constraintTop_toTopOf="@id/img_rollcall"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/text_studentNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        android:text="학번 : 20231234"
+        android:textSize="12sp"
+        android:fontFamily="@font/regular"
+        android:textColor="#FF000000"
+        app:layout_constraintStart_toEndOf="@id/img_rollcall"
+        app:layout_constraintTop_toBottomOf="@id/text_name"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp">
+    <TextView
+        android:id="@+id/text_dormitory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        android:text="기숙사 : 성미관 201호"
+        android:textSize="12sp"
+        android:fontFamily="@font/regular"
+        android:textColor="#FF000000"
+        app:layout_constraintStart_toEndOf="@id/img_rollcall"
+        app:layout_constraintTop_toBottomOf="@id/text_studentNum"/>
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="이름: "
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/text_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="김수룡"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp">
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="학번: "
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/text_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="20231234"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp">
-
-                <TextView
-                    android:id="@+id/textview11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="기숙사: "
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/text_domi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="성미관 201호"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp">
-
-                <TextView
-                    android:id="@+id/textview12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="위치: "
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:id="@+id/text_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="서울특별시 성북구 보문로 34다길 4"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/regular"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        android:text="위치 : 서울특별시 성북구 보문로 34다길 2"
+        android:textSize="12sp"
+        android:fontFamily="@font/regular"
+        android:textColor="#FF000000"
+        app:layout_constraintStart_toEndOf="@id/img_rollcall"
+        app:layout_constraintTop_toBottomOf="@id/text_dormitory"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

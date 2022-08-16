@@ -2,15 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RollCallActivity">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/linear_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false">
+
+            <LinearLayout
+                android:id="@+id/linear_rollcall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_exist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:fontFamily="@font/regular"
+                    android:text="대기 중인 점호가 없습니다."
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_rollcall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/listitem_rollcall" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="131dp"
-        android:background="@drawable/style_rollcall_border"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_setting_user_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,100 +63,63 @@
             android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="50dp"
             android:background="@color/nothing"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_back"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
 
         <TextView
             android:id="@+id/text_toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="점호 확인"
-            android:textSize="20dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginBottom="41dp"
             android:fontFamily="@font/semi_bold"
+            android:text="점호 확인"
+            android:textColor="#FF111111"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/black"/>
-
-
-        <ImageButton
-            android:id="@+id/btn_date_left"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginRight="18dp"
-            android:background="@color/nothing"
-            app:layout_constraintEnd_toStartOf="@+id/text_cal_date"
-            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
-            app:srcCompat="@drawable/icon_rollcall_left"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-        <TextView
-            android:id="@+id/text_cal_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:text="2022.07.01"
-            android:textSize="14dp"
-            android:fontFamily="@font/medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="#434343"
-            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle" />
-
-        <ImageButton
-            android:id="@+id/btn_date_right"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="22dp"
-            android:background="@color/nothing"
-            app:layout_constraintStart_toEndOf="@+id/text_cal_date"
-            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
-            app:srcCompat="@drawable/icon_rollcall_right"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_reject"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_rollcall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/listitem_rollcall"/>
-    </ScrollView>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_reject"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:background="@drawable/style_rollclall_button_border"
-        android:text="반려"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:fontFamily="@font/bold"
+    <LinearLayout
+        android:id="@+id/linear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="20dp"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/btn_approve"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:background="@drawable/style_comm_write_submit_border"
+            android:fontFamily="@font/bold"
+            android:gravity="center"
+            android:text="승인"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_reject"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/style_comm_write_submit_border"
+            android:fontFamily="@font/bold"
+            android:gravity="center"
+            android:text="반려"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

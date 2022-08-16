@@ -71,6 +71,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // 4. 재사생 관리 버튼 연결
+        binding.btnStudentManage.setOnClickListener {
+            Toast.makeText(activity, "준비 중인 기능입니다!", Toast.LENGTH_SHORT).show()
+        }
 
         // Swipe Refresh 버튼 연결
         binding.swipe.setOnRefreshListener {
@@ -151,10 +154,22 @@ class HomeFragment : Fragment() {
                         // 오늘 또는 오늘 이후 날짜만 점호 취소 가능
                         if (date.isAfter(CalendarDay.today()) || date.equals(CalendarDay.today())) {
                             builder.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, i ->
-                                // ★★★ 점호 취소 API 연결
-                                TODO("점호 취소 API 연결")
-                                Toast.makeText(activity, "API 연결이 필요합니다.", Toast.LENGTH_SHORT).show()
-                                dialog.cancel()
+                                // 점호 삭제 API 연결
+                                RetrofitBuilder.rollcallApi.rollcallDelete(token, rollcallId).enqueue(object: Callback<Void> {
+                                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                                        Log.d("ROLLCALL_DELETE", "점호 삭제 성공")
+                                        Log.d("ROLLCALL_DELETE", "response : " + response.body().toString())
+
+                                        Toast.makeText(activity, "점호가 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                                        loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)
+                                        dialog.cancel()
+                                    }
+
+                                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                                        Log.e("ROLLCALL_DELETE", "점호 삭제 실패")
+                                        Log.e("ROLLCALL_DELETE", t.message.toString())
+                                    }
+                                })
                             })
                         }
                         builder.show()
@@ -175,8 +190,7 @@ class HomeFragment : Fragment() {
                     builder.setMessage("점호를 추가하시겠습니까?")
                     builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
                         // 점호일 추가 API 연결
-                        // ★★★ 11시 59분 59초에 시작, 00시 30분 00초에 종료되도록 API 수정
-                        val rollcallInfo = RollcallCreateDTO(date.date.toString(), "00:00", "00:30", dormitory)
+                        val rollcallInfo = RollcallCreateDTO(date.date.toString() + "T23:59:59", date.date.plusDays(1).toString() +"T00:30:00", dormitory)
                         RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
                                 override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
                                     Log.d("ROLLCALL_CREATE", "점호일 추가 성공")
