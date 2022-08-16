@@ -9,7 +9,7 @@
     tools:context=".FAQWriteActivity">
 
     <ImageButton
-        android:id="@+id/btn__back"
+        android:id="@+id/btn_back"
         android:layout_width="20dp"
         android:layout_height="21dp"
         android:layout_marginLeft="28dp"
@@ -58,32 +58,21 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/text_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/regular"
-                    android:text="제목"
-                    android:textColor="#111111"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:id="@+id/linear_dormitory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="38dp"
-                    android:gravity="center"
-                    android:orientation="vertical"/>
-
                 <LinearLayout
                     android:id="@+id/linear_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="53dp"
+                    android:layout_marginHorizontal="45dp"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="제목"
+                        android:textColor="#FF111111"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/edit_title"
@@ -97,8 +86,9 @@
                         android:includeFontPadding="false"
                         android:singleLine="true"
                         android:textColor="@color/gray_600"
-                        android:textColorHint="#FF989898"
+                        android:textColorHint="#989898"
                         android:textSize="12sp"
+                        android:maxLength="30"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>
@@ -108,25 +98,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="26dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/style_comm_write_edittext_border"
                 android:fontFamily="@font/light"
                 android:gravity="top"
                 android:hint="내용을 입력해주세요."
                 android:inputType="textMultiLine"
-                android:maxLines="2000"
+                android:maxLength="2000"
                 android:padding="27dp"
                 android:textColor="@color/gray_600"
-                android:textColorHint="#FF989898"
+                android:textColorHint="#989898"
                 android:textSize="12dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_upload"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:background="@drawable/style_comm_write_submit_border"
                 android:fontFamily="@font/bold"
                 android:text="등록"
@@ -136,4 +125,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage_admin.AlarmActivity
+import kr.co.sujungvillage_admin.LoginActivity
 import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.databinding.FragmentSettingBinding
 import kr.co.sujungvillage_admin.retrofit.HomeInfoResultDTO
@@ -31,6 +33,14 @@ class SettingFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 로그아웃 버튼 연결
+        binding.layoutLeave.setOnClickListener {
+            Toast.makeText(activity, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this.activity, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
 
         // 설정 화면 정보 조회 API 연결 (홈 화면 정보 조회 API 활용)

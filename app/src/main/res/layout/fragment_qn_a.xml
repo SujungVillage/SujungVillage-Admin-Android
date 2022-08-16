@@ -32,9 +32,9 @@
             app:tabIndicator="@drawable/style_qna_indicator"
             app:tabIndicatorHeight="6dp"
             app:tabSelectedTextColor="@color/p_light"
+            app:tabTextAppearance="@style/qna_tab_text"
             app:tabTextColor="#FF6A6A6A"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
-        <!--app:tabTextAppearance="@style/qna_tab_text"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_toolbar"
@@ -76,4 +76,17 @@
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/img_unread"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="21dp"
+        android:visibility="invisible"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_alarm_unread"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>

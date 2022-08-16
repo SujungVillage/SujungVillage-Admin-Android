@@ -41,12 +41,12 @@ class RollcallHolder(val binding: ListitemRollcallBinding): RecyclerView.ViewHol
             // 이미 선택한 점호인 경우
             if (selectedRollcall.contains(rollcall.id)) {
                 selectedRollcall.remove(rollcall.id)
-                binding.layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.green_200))
+                binding.layout.setBackgroundResource(R.drawable.style_rollcall_detail_border)
             }
             // 선택되지 않은 점호인 경우
             else {
                 selectedRollcall.add(rollcall.id)
-                binding.layout.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.green_200))
+                binding.layout.setBackgroundResource(R.drawable.style_rollcall_detail_select)
             }
         }
     }
