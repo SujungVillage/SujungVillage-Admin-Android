@@ -35,6 +35,12 @@ class RollCallActivity : AppCompatActivity() {
         // 대기 중인 점호 리스트 불러오기
         loadRollcallData(token)
 
+        // Swipe Refresh 버튼 연결
+        binding.swipe.setOnRefreshListener {
+            loadRollcallData(token)
+            binding.swipe.isRefreshing = false
+        }
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener{ finish() }
     }
