@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.co.sujungvillage_admin">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,8 +14,16 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SujungVillageAdmin"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".FAQWriteActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:exported="false" />
+        <activity
+            android:name=".QnADetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:exported="false" />
         <activity
             android:name=".NoticeDetailActivity"
             android:exported="true" />
@@ -22,8 +32,8 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -51,8 +61,8 @@
             android:exported="true" />
         <activity
             android:name=".CommWriteActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

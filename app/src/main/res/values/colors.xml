@@ -10,11 +10,12 @@
 
     <!-- user-defined colors -->
     <color name="primary">#FF9AE000</color>
-    <color name="p_liight">#FFD9F17B</color>
+    <color name="p_light">#FFD9F17B</color>
     <color name="p_dark">#FF567C00</color>
 
     <color name="green_100">#FFFFEEBD</color>
     <color name="green_200">#FFD4E496</color>
+    <color name="green_300">#FFD9F17B</color>
 
     <color name="gray_50">#FFD9D9D9</color>
     <color name="gray_100">#FFC5C5C5</color>

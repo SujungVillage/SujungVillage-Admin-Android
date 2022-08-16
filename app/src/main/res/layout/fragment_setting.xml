@@ -267,7 +267,7 @@
                         android:id="@+id/text_leave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="회원 탈퇴"
+                        android:text="로그아웃"
                         android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"

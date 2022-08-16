@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="79dp"
+    android:orientation="horizontal"
+    android:padding="20dp"
+    android:background="@drawable/style_qna_listitem_border"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="30dp">
+
+    <TextView
+        android:id="@+id/text_state"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/style_qna_listitem_complete"
+        android:fontFamily="@font/medium"
+        android:padding="5dp"
+        android:text="답변 완료"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:lines="1"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/medium"
+        android:text="룸메의 청결 문제 고민입니다. 조치 부탁드려요."
+        android:textColor="#FF838383"
+        android:textSize="16dp" />
+
+    <ImageButton
+        android:id="@+id/btn_detail"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:background="@color/nothing"
+        app:srcCompat="@drawable/icon_qna_faq_close"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+</LinearLayout>

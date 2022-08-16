@@ -5,7 +5,6 @@ import kr.co.sujungvillage_admin.BuildConfig.BASE_URL
 import kr.co.sujungvillage_admin.api.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitBuilder {
     // 사용할 API 인터페이스 선언
@@ -15,6 +14,7 @@ object RetrofitBuilder {
     var loginApi: LoginService
     var rollcallApi: RollcallService
     var rewardApi: RewardService
+    var qnaApi: QnAService
 
     val gson = GsonBuilder().setLenient().create()
 
@@ -31,5 +31,6 @@ object RetrofitBuilder {
         loginApi = retrofit.create(LoginService::class.java)
         rollcallApi = retrofit.create(RollcallService::class.java)
         rewardApi = retrofit.create(RewardService::class.java)
+        qnaApi = retrofit.create(QnAService::class.java)
     }
 }
