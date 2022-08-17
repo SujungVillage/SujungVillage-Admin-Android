@@ -77,8 +77,8 @@ class NoticeActivity : AppCompatActivity() {
                 // 리사이클러뷰 어댑터 연결
                 val noticeList: MutableList<NoticeRequestResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
-                    // ★★★ 기숙사 추가
-                    var notice = NoticeRequestResultDTO(info.id, info.title, info.date)
+                    // 기숙사 추가
+                    var notice = NoticeRequestResultDTO(info.id, info.title, info.dormitroy, info.date)
                     noticeList.add(notice)
                 }
                 var adapter = NoticeAdapter()

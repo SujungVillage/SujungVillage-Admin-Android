@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -150,18 +151,19 @@ class HomeFragment : Fragment() {
                             return
                         }
 
-                        // 점호 Alert Dialog 생성
-                        val builder = AlertDialog.Builder(context)
-                        builder.setTitle("${response.body()?.start?.subSequence(0, 10)} 점호")
-                        builder.setMessage("시작 시간 : ${response.body()?.start?.subSequence(11, 19)}" +
-                                "\n종료 시간 : ${response.body()?.end?.subSequence(11, 19)}" +
-                                "\n점호 대상 : ${response.body()?.dormitory.toString()} 기숙사")
-                        builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
-                            dialog.cancel()
-                        })
-                        // 오늘 또는 오늘 이후 날짜만 점호 취소 가능
+                        // 점호 Alert Dialog 레이아웃 설정 및 생성
+                        val dialogLayout = layoutInflater.inflate(R.layout.layout_calendar_rollcall_check, null)
+                        val builder = AlertDialog.Builder(context).apply { setView(dialogLayout) }
+                        val dialog = builder.create()
+                        dialog.show()
+
+                        // Alert Dialog 점호 정보 설정
+                        dialogLayout.findViewById<TextView>(R.id.text_title).text = "${date.date} 점호"
+                        dialogLayout.findViewById<TextView>(R.id.text_dormitory).text = "•  점호 대상 : ${response.body()?.dormitory} 기숙사"
+                        dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
+                        // 오늘 또는 오늘 이후 날짜만 외박 취소 가능
                         if (date.isAfter(CalendarDay.today()) || date.equals(CalendarDay.today())) {
-                            builder.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, i ->
+                            dialogLayout.findViewById<TextView>(R.id.btn_cancel).setOnClickListener {
                                 // 점호 삭제 API 연결
                                 RetrofitBuilder.rollcallApi.rollcallDelete(token, rollcallId).enqueue(object: Callback<Void> {
                                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -178,9 +180,10 @@ class HomeFragment : Fragment() {
                                         Log.e("ROLLCALL_DELETE", t.message.toString())
                                     }
                                 })
-                            })
+                            }
+                        } else {
+                            dialogLayout.findViewById<TextView>(R.id.btn_cancel).visibility = View.GONE
                         }
-                        builder.show()
                     }
 
                     override fun onFailure(call: Call<RollcallGetDateResultDTO>, t: Throwable) {
