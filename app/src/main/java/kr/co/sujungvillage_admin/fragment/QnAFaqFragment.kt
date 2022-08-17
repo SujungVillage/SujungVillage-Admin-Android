@@ -1,6 +1,7 @@
 package kr.co.sujungvillage_admin.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage_admin.CommWriteActivity
+import kr.co.sujungvillage_admin.FAQWriteActivity
 import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.adapter.QnAFaqAdapter
 import kr.co.sujungvillage_admin.data.FaqGetResultDTO
@@ -35,6 +38,10 @@ class QnAFaqFragment : Fragment() {
         binding.swipe.setOnRefreshListener {
             loadFaqData(token, binding.recycleFaq, binding.textExist)
             binding.swipe.isRefreshing = false
+        }
+        binding.btnWrite.setOnClickListener{
+            var intent = Intent(this.activity, FAQWriteActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

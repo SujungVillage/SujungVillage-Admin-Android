@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kr.co.sujungvillage_admin.base.hideKeyboard
 import kr.co.sujungvillage_admin.data.MyqDetailGetResultDTO
+import kr.co.sujungvillage_admin.data.QnaAnswerDTO
+import kr.co.sujungvillage_admin.data.QnaAnswerResultDTO
 import kr.co.sujungvillage_admin.databinding.ActivityQnAdetailBinding
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
@@ -26,7 +28,7 @@ class QnADetailActivity : AppCompatActivity() {
         // 로컬 변수 불러오기
         val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
-
+        var content=""
         // 키보드 내리기
         binding.layoutQuestion.setOnClickListener { this.hideKeyboard() }
         binding.layoutAnswer.setOnClickListener { this.hideKeyboard() }
@@ -36,13 +38,41 @@ class QnADetailActivity : AppCompatActivity() {
 
         // 이전 페이지(QnAQuestFragment)에서 questionId 전달 받기
         val questionId = intent.getLongExtra("questionId", -1)
-
+        refresh(token,questionId)
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
-
+        binding.btnRegister.setOnClickListener{
+            content=binding.editAnswer.text.toString().trim()
+            if(content.isEmpty()){
+                Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                //api 연결
+                Log.d("QNA_WRITE",content)
+                val qnaAnswerInfo=QnaAnswerDTO(questionId,content)
+                RetrofitBuilder.qnaApi.qnaAnswer(token,qnaAnswerInfo).enqueue(object :Callback<QnaAnswerResultDTO>{
+                    override fun onResponse(call: Call<QnaAnswerResultDTO>, response: Response<QnaAnswerResultDTO>) {
+                        if(response.isSuccessful){
+                            Log.d("QNA_ANSWER",response.message().toString())
+                            refresh(token,questionId)
+                        }
+                    }
+                    override fun onFailure(call: Call<QnaAnswerResultDTO>, t: Throwable) {
+                        Log.d("QNA_ANSWER",t.message.toString())
+                    }
+                })
+            }
+        }
+    }
+    private fun refresh(token:String,questionId:Long){
         // 내 질문 상세 조회 API 연결
         RetrofitBuilder.qnaApi.questionDetailGet(token, questionId).enqueue(object: Callback<MyqDetailGetResultDTO> {
             override fun onResponse(call: Call<MyqDetailGetResultDTO>, response: Response<MyqDetailGetResultDTO>) {
+                Log.d("QUESTION_DETAIL",response.message())
+                Log.d("QUESTION_DETAIL",response.body().toString())
+                Log.d("QUESTION_DETAIL",response.code().toString())
+
+
                 if (response.isSuccessful) {
                     Log.d("QUESTION_DETAIL", "질문 상세 조회 성공")
                     Log.d("QUESTION_DETAIL", response.body().toString())

@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/text_question"
-            android:layout_width="match_parent"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="7dp"
@@ -35,14 +35,27 @@
             android:fontFamily="@font/medium"
             android:text="점호 시간과 요일은 언제인가요? 답변 부탁드립니다."
             android:textSize="17dp" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icon_faq_delete" />
+
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/text_answer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+
         android:background="@drawable/style_qna_faq_middle_line"
         android:fontFamily="@font/medium"
         android:layout_marginTop="-3dp"
