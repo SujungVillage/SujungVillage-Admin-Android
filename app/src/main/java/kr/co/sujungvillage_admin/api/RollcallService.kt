@@ -1,9 +1,6 @@
 package kr.co.sujungvillage_admin.api
 
-import kr.co.sujungvillage_admin.data.RollcallCreateDTO
-import kr.co.sujungvillage_admin.data.RollcallCreateResultDTO
-import kr.co.sujungvillage_admin.data.RollcallGetDateResultDTO
-import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
+import kr.co.sujungvillage_admin.data.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -41,8 +38,7 @@ interface RollcallService {
     @PATCH("/api/admin/rollcall/changeRollcallState")
     fun rollcallChange(
         @Header("jwt_token") token: String,
-        @Query("rollcallId") rollcallId: List<Long>,
-        @Query("state") state: String,
+        @Body rollcallInfo: RollcallChangeDTO
     ): Call<Void>
 
     // 대기 중인 점호 신청 리스트 조회

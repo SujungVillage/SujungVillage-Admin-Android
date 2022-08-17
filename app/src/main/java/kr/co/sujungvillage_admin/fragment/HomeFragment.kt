@@ -89,6 +89,10 @@ class HomeFragment : Fragment() {
             loadCalendarData(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString(), binding.calendar)
             binding.swipe.isRefreshing = false
         }
+        // 스크롤 업 시 리프레시 방지
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled = binding.scroll.scrollY == 0
+        }
 
         // 캘린더 좌우 버튼 연결
         binding.calendar.setOnMonthChangedListener { widget, date ->

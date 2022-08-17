@@ -135,6 +135,10 @@ class CommFragment : Fragment() {
                 binding.swipe.isRefreshing=false
             }
         }
+        // 스크롤 업 시 리프레시 방지
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled = binding.scroll.scrollY == 0
+        }
 
         // 글 작성 버튼 연결
         binding.btnWrite.setOnClickListener {

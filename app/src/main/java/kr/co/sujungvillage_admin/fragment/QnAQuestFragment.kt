@@ -48,6 +48,10 @@ class QnAQuestFragment : Fragment() {
             loadQuestionData(token, binding.recycleQuestion)
             binding.swipe.isRefreshing = false
         }
+        // 스크롤 업 시 리프레시 방지
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled = binding.scroll.scrollY == 0
+        }
 
         return binding.root
     }
