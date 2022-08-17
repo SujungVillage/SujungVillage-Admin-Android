@@ -1,14 +1,25 @@
 package kr.co.sujungvillage_admin.api
 
-import kr.co.sujungvillage_admin.data.FaqGetResultDTO
-import kr.co.sujungvillage_admin.data.MyqDetailGetResultDTO
-import kr.co.sujungvillage_admin.data.QuestionGetResultDTO
+import kr.co.sujungvillage_admin.data.*
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface QnAService {
+
+    //QNA 답변 작성
+    @POST("/api/admin/qna/writeAnswer")
+    fun qnaAnswer(
+        @Header("jwt_token")token:String,
+        @Body qnaAnswerInfo:QnaAnswerDTO
+    ):Call<QnaAnswerResultDTO>
+
+    //FAQ 작성
+    @POST("/api/admin/qna/writeFaq")
+    fun faqWrite(
+        @Header("jwt_token")token:String,
+        @Body faqWriteInfo: FaqWriteRequestDTO
+    ):Call<FaqWriteResultDTO>
+
     // FAQ 질문 리스트 조회
     @GET("/api/common/qna/getAllFaq")
     fun faqGet(

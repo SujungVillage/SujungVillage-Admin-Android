@@ -7,16 +7,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import kr.co.sujungvillage_admin.base.hideKeyboard
 import kr.co.sujungvillage_admin.data.MyqDetailGetResultDTO
+import kr.co.sujungvillage_admin.data.QnaAnswerDTO
+import kr.co.sujungvillage_admin.data.QnaAnswerResultDTO
 import kr.co.sujungvillage_admin.databinding.ActivityQnAdetailBinding
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class QnADetailActivity : AppCompatActivity() {
+class QnaDetailActivity : AppCompatActivity() {
     val binding by lazy { ActivityQnAdetailBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class QnADetailActivity : AppCompatActivity() {
         // 로컬 변수 불러오기
         val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
-
+        var content=""
         // 키보드 내리기
         binding.layoutQuestion.setOnClickListener { this.hideKeyboard() }
         binding.layoutAnswer.setOnClickListener { this.hideKeyboard() }
@@ -36,13 +37,41 @@ class QnADetailActivity : AppCompatActivity() {
 
         // 이전 페이지(QnAQuestFragment)에서 questionId 전달 받기
         val questionId = intent.getLongExtra("questionId", -1)
-
+        refresh(token,questionId)
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
-
+        binding.btnRegister.setOnClickListener{
+            content=binding.editAnswer.text.toString().trim()
+            if(content.isEmpty()){
+                Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                //api 연결
+                Log.d("QNA_WRITE",content)
+                val qnaAnswerInfo=QnaAnswerDTO(questionId,content)
+                RetrofitBuilder.qnaApi.qnaAnswer(token,qnaAnswerInfo).enqueue(object :Callback<QnaAnswerResultDTO>{
+                    override fun onResponse(call: Call<QnaAnswerResultDTO>, response: Response<QnaAnswerResultDTO>) {
+                        if(response.isSuccessful){
+                            Log.d("QNA_ANSWER",response.message().toString())
+                            refresh(token,questionId)
+                        }
+                    }
+                    override fun onFailure(call: Call<QnaAnswerResultDTO>, t: Throwable) {
+                        Log.d("QNA_ANSWER",t.message.toString())
+                    }
+                })
+            }
+        }
+    }
+    private fun refresh(token:String,questionId:Long){
         // 내 질문 상세 조회 API 연결
         RetrofitBuilder.qnaApi.questionDetailGet(token, questionId).enqueue(object: Callback<MyqDetailGetResultDTO> {
             override fun onResponse(call: Call<MyqDetailGetResultDTO>, response: Response<MyqDetailGetResultDTO>) {
+                Log.d("QUESTION_DETAIL",response.message())
+                Log.d("QUESTION_DETAIL",response.body().toString())
+                Log.d("QUESTION_DETAIL",response.code().toString())
+
+
                 if (response.isSuccessful) {
                     Log.d("QUESTION_DETAIL", "질문 상세 조회 성공")
                     Log.d("QUESTION_DETAIL", response.body().toString())
@@ -65,7 +94,7 @@ class QnADetailActivity : AppCompatActivity() {
                     binding.textAnswerDate.text = "${response.body()?.answer?.regDate?.subSequence(0, 10)} ${response.body()?.answer?.regDate?.subSequence(11, 16)}"
                     binding.textAnswer.text = response.body()?.answer?.content
                 } else {
-                    val builder = androidx.appcompat.app.AlertDialog.Builder(this@QnADetailActivity)
+                    val builder = androidx.appcompat.app.AlertDialog.Builder(this@QnaDetailActivity)
                     builder.setTitle("글이 존재하지 않습니다.")
                         .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, id ->
                             Log.d("COMM_DETAIL", "글이 존재하지 않음")
@@ -78,7 +107,7 @@ class QnADetailActivity : AppCompatActivity() {
                 Log.e("QUESTION_DETAIL", "질문 상세 조회 실패")
                 Log.e("QUESTION_DETAIL", t.message.toString())
 
-                Toast.makeText(this@QnADetailActivity, "불러올 수 없는 질문입니다.", Toast.LENGTH_SHORT)
+                Toast.makeText(this@QnaDetailActivity, "불러올 수 없는 질문입니다.", Toast.LENGTH_SHORT)
                     .show()
                 finish()
             }
