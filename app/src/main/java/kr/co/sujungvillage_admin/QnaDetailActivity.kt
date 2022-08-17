@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import kr.co.sujungvillage_admin.base.hideKeyboard
 import kr.co.sujungvillage_admin.data.MyqDetailGetResultDTO
 import kr.co.sujungvillage_admin.data.QnaAnswerDTO
@@ -18,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class QnADetailActivity : AppCompatActivity() {
+class QnaDetailActivity : AppCompatActivity() {
     val binding by lazy { ActivityQnAdetailBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +94,7 @@ class QnADetailActivity : AppCompatActivity() {
                     binding.textAnswerDate.text = "${response.body()?.answer?.regDate?.subSequence(0, 10)} ${response.body()?.answer?.regDate?.subSequence(11, 16)}"
                     binding.textAnswer.text = response.body()?.answer?.content
                 } else {
-                    val builder = androidx.appcompat.app.AlertDialog.Builder(this@QnADetailActivity)
+                    val builder = androidx.appcompat.app.AlertDialog.Builder(this@QnaDetailActivity)
                     builder.setTitle("글이 존재하지 않습니다.")
                         .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, id ->
                             Log.d("COMM_DETAIL", "글이 존재하지 않음")
@@ -108,7 +107,7 @@ class QnADetailActivity : AppCompatActivity() {
                 Log.e("QUESTION_DETAIL", "질문 상세 조회 실패")
                 Log.e("QUESTION_DETAIL", t.message.toString())
 
-                Toast.makeText(this@QnADetailActivity, "불러올 수 없는 질문입니다.", Toast.LENGTH_SHORT)
+                Toast.makeText(this@QnaDetailActivity, "불러올 수 없는 질문입니다.", Toast.LENGTH_SHORT)
                     .show()
                 finish()
             }

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.sujungvillage_admin.QnADetailActivity
+import kr.co.sujungvillage_admin.QnaDetailActivity
 import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.data.QuestionGetResultDTO
 import kr.co.sujungvillage_admin.databinding.ListitemQnaMyqBinding
@@ -37,7 +37,7 @@ class QnAMyqHolder(val binding: ListitemQnaMyqBinding): RecyclerView.ViewHolder(
 
         // 내 질문 클릭 시 상세 액티비티 생성
         binding.root.setOnClickListener {
-            var intent = Intent(binding.root.context, QnADetailActivity::class.java)
+            var intent = Intent(binding.root.context, QnaDetailActivity::class.java)
             intent.putExtra("questionId", question.id)
             startActivity(binding.root.context, intent, null)
         }
