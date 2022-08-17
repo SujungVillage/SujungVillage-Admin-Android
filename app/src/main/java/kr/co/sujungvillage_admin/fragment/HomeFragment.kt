@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -40,10 +41,11 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        //  토큰 불러오기
+        //  로컬 변수 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
         var dormitory = shared?.getString("dormitory", "error").toString()
+        val read = shared?.getBoolean("alarmRead", true)
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -52,6 +54,13 @@ class HomeFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // 홈화면 주요 기능 버튼 연결
@@ -142,18 +151,19 @@ class HomeFragment : Fragment() {
                             return
                         }
 
-                        // 점호 Alert Dialog 생성
-                        val builder = AlertDialog.Builder(context)
-                        builder.setTitle("${response.body()?.start?.subSequence(0, 10)} 점호")
-                        builder.setMessage("시작 시간 : ${response.body()?.start?.subSequence(11, 19)}" +
-                                "\n종료 시간 : ${response.body()?.end?.subSequence(11, 19)}" +
-                                "\n점호 대상 : ${response.body()?.dormitory.toString()} 기숙사")
-                        builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
-                            dialog.cancel()
-                        })
-                        // 오늘 또는 오늘 이후 날짜만 점호 취소 가능
+                        // 점호 Alert Dialog 레이아웃 설정 및 생성
+                        val dialogLayout = layoutInflater.inflate(R.layout.layout_calendar_rollcall_check, null)
+                        val builder = AlertDialog.Builder(context).apply { setView(dialogLayout) }
+                        val dialog = builder.create()
+                        dialog.show()
+
+                        // Alert Dialog 점호 정보 설정
+                        dialogLayout.findViewById<TextView>(R.id.text_title).text = "${date.date} 점호"
+                        dialogLayout.findViewById<TextView>(R.id.text_dormitory).text = "•  점호 대상 : ${response.body()?.dormitory} 기숙사"
+                        dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
+                        // 오늘 또는 오늘 이후 날짜만 외박 취소 가능
                         if (date.isAfter(CalendarDay.today()) || date.equals(CalendarDay.today())) {
-                            builder.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, i ->
+                            dialogLayout.findViewById<TextView>(R.id.btn_cancel).setOnClickListener {
                                 // 점호 삭제 API 연결
                                 RetrofitBuilder.rollcallApi.rollcallDelete(token, rollcallId).enqueue(object: Callback<Void> {
                                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -170,9 +180,10 @@ class HomeFragment : Fragment() {
                                         Log.e("ROLLCALL_DELETE", t.message.toString())
                                     }
                                 })
-                            })
+                            }
+                        } else {
+                            dialogLayout.findViewById<TextView>(R.id.btn_cancel).visibility = View.GONE
                         }
-                        builder.show()
                     }
 
                     override fun onFailure(call: Call<RollcallGetDateResultDTO>, t: Throwable) {

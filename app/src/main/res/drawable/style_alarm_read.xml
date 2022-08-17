@@ -3,8 +3,7 @@
     <item
         android:top="-1dp"
         android:right="-1dp"
-        android:left="-1dp"
-        android:bottom="1dp">
+        android:left="-1dp">
         <shape>
             <stroke
                 android:color="@color/gray_50"

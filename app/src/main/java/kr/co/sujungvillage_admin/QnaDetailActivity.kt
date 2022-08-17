@@ -28,6 +28,7 @@ class QnaDetailActivity : AppCompatActivity() {
         val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
         var content=""
+
         // 키보드 내리기
         binding.layoutQuestion.setOnClickListener { this.hideKeyboard() }
         binding.layoutAnswer.setOnClickListener { this.hideKeyboard() }
@@ -38,29 +39,36 @@ class QnaDetailActivity : AppCompatActivity() {
         // 이전 페이지(QnAQuestFragment)에서 questionId 전달 받기
         val questionId = intent.getLongExtra("questionId", -1)
         refresh(token,questionId)
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
+
+        // 등록 버튼 연결
         binding.btnRegister.setOnClickListener{
             content=binding.editAnswer.text.toString().trim()
+
+            // 답변 내용을 작성하지 않은 경우
             if(content.isEmpty()){
                 Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-            else{
-                //api 연결
-                Log.d("QNA_WRITE",content)
-                val qnaAnswerInfo=QnaAnswerDTO(questionId,content)
-                RetrofitBuilder.qnaApi.qnaAnswer(token,qnaAnswerInfo).enqueue(object :Callback<QnaAnswerResultDTO>{
-                    override fun onResponse(call: Call<QnaAnswerResultDTO>, response: Response<QnaAnswerResultDTO>) {
-                        if(response.isSuccessful){
-                            Log.d("QNA_ANSWER",response.message().toString())
-                            refresh(token,questionId)
-                        }
+
+            // QnA 답변 작성 API 연결
+            Log.d("QNA_WRITE",content)
+            val qnaAnswerInfo=QnaAnswerDTO(questionId,content)
+            RetrofitBuilder.qnaApi.qnaAnswer(token,qnaAnswerInfo).enqueue(object :Callback<QnaAnswerResultDTO>{
+                override fun onResponse(call: Call<QnaAnswerResultDTO>, response: Response<QnaAnswerResultDTO>) {
+                    if(response.isSuccessful){
+                        Log.d("QNA_ANSWER",response.message().toString())
+                        this@QnaDetailActivity.hideKeyboard()
+                        refresh(token,questionId)
                     }
-                    override fun onFailure(call: Call<QnaAnswerResultDTO>, t: Throwable) {
-                        Log.d("QNA_ANSWER",t.message.toString())
-                    }
-                })
-            }
+                }
+                override fun onFailure(call: Call<QnaAnswerResultDTO>, t: Throwable) {
+                    Log.d("QNA_ANSWER",t.message.toString())
+                }
+            })
+
         }
     }
     private fun refresh(token:String,questionId:Long){
@@ -70,7 +78,6 @@ class QnaDetailActivity : AppCompatActivity() {
                 Log.d("QUESTION_DETAIL",response.message())
                 Log.d("QUESTION_DETAIL",response.body().toString())
                 Log.d("QUESTION_DETAIL",response.code().toString())
-
 
                 if (response.isSuccessful) {
                     Log.d("QUESTION_DETAIL", "질문 상세 조회 성공")

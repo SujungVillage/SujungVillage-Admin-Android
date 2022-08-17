@@ -41,7 +41,13 @@ interface RollcallService {
     @PATCH("/api/admin/rollcall/changeRollcallState")
     fun rollcallChange(
         @Header("jwt_token") token: String,
-        @Query("rollcallId") rollcallId: Long,
+        @Query("rollcallId") rollcallId: List<Long>,
         @Query("state") state: String,
     ): Call<Void>
+
+    // 대기 중인 점호 신청 리스트 조회
+    @GET("/api/admin/rollcall/getWaitingRollcallList")
+    fun rollcallGetWaitingList(
+        @Header("jwt_token") token: String,
+    ): Call<List<RollcallGetListResultDTO>>
 }
