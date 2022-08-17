@@ -24,6 +24,7 @@ class CommDetailActivity : AppCompatActivity() {
         var token=""
         var commentIndex: MutableList<String>? = null
         var postId=0L
+        var postWriterId=0
     }
 
     val binding by lazy { ActivityCommDetailBinding.inflate(layoutInflater) }
@@ -120,6 +121,7 @@ class CommDetailActivity : AppCompatActivity() {
                     binding.textContent.text=response.body()?.content
 
                     //관리자이면 관리자 마크 보이게
+                    postWriterId=response.body()?.writerId.toString().toInt()
                     if(response.body()?.writerId.toString().toInt()>=99990000){//관리자인 경우
                         binding.textAdmin.visibility=View.VISIBLE
                     }

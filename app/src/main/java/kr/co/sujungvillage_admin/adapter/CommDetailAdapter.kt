@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage_admin.CommDetailActivity.Companion.adminNum
 import kr.co.sujungvillage_admin.CommDetailActivity.Companion.commentIndex
+import kr.co.sujungvillage_admin.CommDetailActivity.Companion.postWriterId
 import kr.co.sujungvillage_admin.CommDetailActivity.Companion.token
 import kr.co.sujungvillage_admin.base.hideKeyboard
 import kr.co.sujungvillage_admin.data.CommDetailCommentsRequest
@@ -39,7 +40,7 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context):RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        if(commDetail.writerId==adminNum){
+        if(postWriterId.toString()==commDetail.writerId){
             binding.textName.text="글쓴이"
         }
         else {
