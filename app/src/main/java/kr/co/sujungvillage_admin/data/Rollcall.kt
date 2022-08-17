@@ -56,8 +56,8 @@ data class RollcallGetListResultDTO(
 ): Serializable {}
 
 data class RollcallChangeDTO(
-    @SerializedName("rollcallId")
-    val id: Long,
+    @SerializedName("rollcallIds")
+    val id: List<Long>,
     @SerializedName("state")
     val state: String,
 ): Serializable {}

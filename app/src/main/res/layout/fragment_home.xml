@@ -114,6 +114,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <ScrollView
+                    android:id="@+id/scroll"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="5dp"
@@ -260,8 +261,8 @@
                             android:layout_marginTop="30dp"
                             app:mcv_dateTextAppearance="@style/calendar_date_text_default"
                             app:mcv_headerTextAppearance="@style/calendar_header_text_default"
-                            app:mcv_selectionMode="single"
                             app:mcv_selectionColor="@color/nothing"
+                            app:mcv_selectionMode="single"
                             app:mcv_weekDayTextAppearance="@style/calendar_week_text_default" />
 
                         <TextView

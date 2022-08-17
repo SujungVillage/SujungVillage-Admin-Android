@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage_admin.adapter.RollcallAdapter
+import kr.co.sujungvillage_admin.data.RollcallChangeDTO
 import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
 import kr.co.sujungvillage_admin.databinding.ActivityCommWriteBinding
 import kr.co.sujungvillage_admin.databinding.ActivityRollCallBinding
@@ -41,6 +42,10 @@ class RollCallActivity : AppCompatActivity() {
             loadRollcallData(token)
             binding.swipe.isRefreshing = false
         }
+        // 스크롤 업 시 리프레시 방지
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled = binding.scroll.scrollY == 0
+        }
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener{ finish() }
@@ -48,7 +53,7 @@ class RollCallActivity : AppCompatActivity() {
         // 승인 버튼 연결
         binding.btnApprove.setOnClickListener {
             for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, selectedRollcall,"승인").enqueue(object: Callback<Void> {
+                RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "승인")).enqueue(object: Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         Log.d("ROLLCALL_APPROVE", "점호 승인 성공")
                         Log.d("ROLLCALL_APPROVE", response.body().toString())
@@ -70,7 +75,7 @@ class RollCallActivity : AppCompatActivity() {
         // 반려 버튼 연결
         binding.btnReject.setOnClickListener {
             for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, selectedRollcall,"반려").enqueue(object: Callback<Void> {
+                RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "반려")).enqueue(object: Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         Log.d("ROLLCALL_REJECT", "점호 반려 성공")
                         Log.d("ROLLCALL_REJECT", response.body().toString())
