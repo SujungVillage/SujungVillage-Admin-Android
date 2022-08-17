@@ -12,28 +12,31 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/text_admin"
-            android:layout_width="36dp"
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="9dp"
+            android:textSize="13dp"
+            android:fontFamily="@font/medium"
+            android:textColor="@color/black"
+            android:text="익명1" />
+        <TextView
+            android:id="@+id/text_admin"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:background="@drawable/style_comm_listitem_admin_border"
             android:gravity="center"
             android:padding="3dp"
             android:text="관리자"
             android:textColor="#ffffff"
-            android:textSize="10dp"
+            android:textSize="8dp"
             android:visibility="gone"
             android:fontFamily="@font/medium"
             android:layout_gravity="center" />
-    <TextView
-        android:id="@+id/text_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:fontFamily="@font/medium"
-        android:textColor="@color/black"
-        android:layout_weight="1"
-        android:text="익명1" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/text_comment_delete"
             android:layout_width="wrap_content"

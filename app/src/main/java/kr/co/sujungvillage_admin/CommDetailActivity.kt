@@ -35,7 +35,6 @@ class CommDetailActivity : AppCompatActivity() {
         val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         adminNum = shared?.getString("id", "error").toString()
         token = shared?.getString("token", "error").toString()
-        Log.d("COMM_DELETE","studentNum: ${adminNum}")
 
         // 이전 페이지 CommFragment 에서 postId 전달 받기
         postId = intent.getLongExtra("postId",-1)
