@@ -40,10 +40,11 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        //  토큰 불러오기
+        //  로컬 변수 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
         var dormitory = shared?.getString("dormitory", "error").toString()
+        val read = shared?.getBoolean("alarmRead", true)
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -52,6 +53,13 @@ class HomeFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // 홈화면 주요 기능 버튼 연결

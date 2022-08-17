@@ -48,7 +48,7 @@ class RollCallActivity : AppCompatActivity() {
         // 승인 버튼 연결
         binding.btnApprove.setOnClickListener {
             for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, rollcall,"승인").enqueue(object: Callback<Void> {
+                RetrofitBuilder.rollcallApi.rollcallChange(token, selectedRollcall,"승인").enqueue(object: Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         Log.d("ROLLCALL_APPROVE", "점호 승인 성공")
                         Log.d("ROLLCALL_APPROVE", response.body().toString())
@@ -70,7 +70,7 @@ class RollCallActivity : AppCompatActivity() {
         // 반려 버튼 연결
         binding.btnReject.setOnClickListener {
             for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, rollcall,"거부").enqueue(object: Callback<Void> {
+                RetrofitBuilder.rollcallApi.rollcallChange(token, selectedRollcall,"반려").enqueue(object: Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         Log.d("ROLLCALL_REJECT", "점호 반려 성공")
                         Log.d("ROLLCALL_REJECT", response.body().toString())
@@ -90,9 +90,9 @@ class RollCallActivity : AppCompatActivity() {
 
     // 점호 신청 리스트 불러오기 함수
     fun loadRollcallData(token: String) {
-        // 점호 신청 리스트 조회 API 연결 (★★★ 대기 중인 모든 날짜의 점호 리스트로 수정하기)
+        // 대기 중인 점호 리스트 조회 API 연결
         Log.d("DATE_TEST", CalendarDay.today().date.plusDays(-1).toString())
-        RetrofitBuilder.rollcallApi.rollcallGetList(token, CalendarDay.today().date.plusDays(-1).toString(), "대기").enqueue(object: Callback<List<RollcallGetListResultDTO>> {
+        RetrofitBuilder.rollcallApi.rollcallGetWaitingList(token).enqueue(object: Callback<List<RollcallGetListResultDTO>> {
             override fun onResponse(call: Call<List<RollcallGetListResultDTO>>, response: Response<List<RollcallGetListResultDTO>>) {
                 Log.d("ROLLCALL_LIST_REQUEST", "점호 신청 리스트 조회 성공")
                 Log.d("ROLLCALL_LIST_REQUEST", response.body().toString())

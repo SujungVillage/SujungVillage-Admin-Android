@@ -46,10 +46,12 @@ class CommFragment : Fragment() {
         _binding = FragmentCommBinding.inflate(inflater, container, false)
 
         var searchText=""
-        // 재사생 학번 불러오기
 
+        // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         token = shared?.getString("token", "error").toString()
+        val read = shared?.getBoolean("alarmRead", true)
+
         // 키보드 내리기
         binding.linear.setOnClickListener { this.hideKeyboard() }
 
@@ -57,6 +59,13 @@ class CommFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // 검색 기능
