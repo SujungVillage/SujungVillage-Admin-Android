@@ -88,7 +88,7 @@
                         android:textColor="@color/gray_600"
                         android:textColorHint="@color/gray_250"
                         android:textSize="12sp"
-                        android:maxLength="30"
+                        android:maxLength="255"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>

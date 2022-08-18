@@ -124,7 +124,7 @@
                 android:ems="10"
                 android:gravity="top"
                 android:inputType="textPersonName"
-                android:maxLength="2000"
+                android:maxLength="255"
                 android:padding="27dp"
                 android:text="부여 사유를 입력해주세요."
                 android:textColor="#989898"
