@@ -149,7 +149,7 @@
                         android:fontFamily="@font/light"
                         android:gravity="center_vertical"
                         android:inputType="textPersonName"
-                        android:maxLength="255"
+                        android:maxLength="2000"
                         android:paddingHorizontal="10dp"
                         android:textColor="#FF111111"
                         android:textSize="12dp"
