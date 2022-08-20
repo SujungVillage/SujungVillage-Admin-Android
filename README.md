@@ -1,4 +1,4 @@
-# SujungVillage-Admin-Android
+# 우리들이 꿈 꾸는 공간, 수정마을 🏡
 
 ## 📌 Commit Message Convention
 - ➕ **[ADD]** : FEAT 이외의 부수적인 코드, 라이브러리, 파일 추가
