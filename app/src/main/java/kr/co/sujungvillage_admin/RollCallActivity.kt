@@ -102,6 +102,9 @@ class RollCallActivity : AppCompatActivity() {
                 Log.d("ROLLCALL_LIST_REQUEST", "점호 신청 리스트 조회 성공")
                 Log.d("ROLLCALL_LIST_REQUEST", response.body().toString())
 
+                // 선택 점호 초기화
+                selectedRollcall.clear()
+
                 if (response.body()?.size == 0) {
                     binding.textExist.visibility = View.VISIBLE
                 } else {
