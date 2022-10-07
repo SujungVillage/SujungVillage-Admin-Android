@@ -13,3 +13,9 @@ data class ResidentRequestResultDTO(
     @SerializedName("detailedAddress")
     val detailedAddress: String,
 ) : Serializable {}
+
+data class SelectedUser(
+    val name: String,
+    val userId: String,
+    val dormitoryName: String,
+) : Serializable {}
