@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +9,7 @@
     tools:context=".RewardWriteActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="28dp"
@@ -28,7 +30,7 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="47dp"
@@ -39,34 +41,36 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:paddingTop="5dp">
 
         <LinearLayout
+            android:id="@+id/linear_reward"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_reward"
+                android:id="@+id/recycler_students"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="3"
                 tools:listitem="@layout/listitem_reward_write" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_toggle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp">
 
                 <RadioGroup
-                    android:id="@+id/radioGroup"
+                    android:id="@+id/radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -74,7 +78,8 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/radio_reward"
+                        android:checked="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
@@ -84,7 +89,7 @@
                         android:theme="@style/CustomRadioButton" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/radio_penalty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
@@ -96,56 +101,54 @@
                 </RadioGroup>
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/edit_point"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/light"
                     android:backgroundTint="@color/primary"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:maxLength="30"
-                    android:text="부여할 점수를 입력해주세요."
-                    android:textColor="#989898"
+                    android:hint="부여할 점수를 입력해주세요."
+                    android:textColorHint="@color/gray_250"
                     android:textSize="12dp"
-                    app:layout_constraintStart_toEndOf="@+id/radioGroup"
+                    app:layout_constraintStart_toEndOf="@+id/radio_group"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="TouchTargetSizeCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/edit_reason"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginHorizontal="31dp"
-                android:layout_marginVertical="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/style_comm_write_edittext_border"
                 android:ems="10"
                 android:gravity="top"
-                android:inputType="textPersonName"
+                android:hint="부여 사유를 입력해주세요."
+                android:inputType="textMultiLine"
                 android:maxLength="255"
                 android:padding="27dp"
-                android:text="부여 사유를 입력해주세요."
-                android:textColor="#989898"
+                android:textColorHint="@color/gray_250"
                 android:textSize="12dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
+                android:id="@+id/btn_register"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:background="@drawable/style_comm_write_submit_border"
+                android:fontFamily="@font/bold"
                 android:text="등록"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:layout_marginBottom="30dp"
                 tools:ignore="TouchTargetSizeCheck" />
-
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </LinearLayout>

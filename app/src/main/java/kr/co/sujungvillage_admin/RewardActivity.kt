@@ -1,6 +1,7 @@
 package kr.co.sujungvillage_admin
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +12,20 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage_admin.adapter.RewardAdapter
 import kr.co.sujungvillage_admin.data.ResidentRequestResultDTO
+import kr.co.sujungvillage_admin.data.SelectedUser
 import kr.co.sujungvillage_admin.databinding.ActivityRewardBinding
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class RewardActivity : AppCompatActivity() {
     val binding by lazy { ActivityRewardBinding.inflate(layoutInflater) }
 
     companion object {
-        var selectedReward: MutableList<String> = mutableListOf()
+        var selecteduserId: MutableList<String> = arrayListOf()
+        var selectedStudent: MutableList<SelectedUser> = arrayListOf()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,24 +41,18 @@ class RewardActivity : AppCompatActivity() {
 
         // 상벌점 작성 버튼 연결
         binding.btnNext.setOnClickListener {
-
+            if (selecteduserId.isEmpty()) {
+                Toast.makeText(this, "선택된 인원이 없습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val intent = Intent(this, RewardWriteActivity::class.java)
+            intent.putExtra("rewards", selectedStudent as Serializable)
+            startActivity(intent)
         }
 
         // 전체 해제 버튼 연결
         binding.btnClear.setOnClickListener {
-            selectedReward.clear()
             loadStudentData(token, binding.spinnerDormitory.selectedItem.toString())
-        }
-
-        // Swipe Refresh 버튼 연결
-        binding.swipe.setOnRefreshListener {
-            loadStudentData(token, binding.spinnerDormitory.selectedItem.toString())
-            binding.swipe.isRefreshing = false
-        }
-
-        // 스크롤 업 시 리프레시 방지
-        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
-            binding.swipe.isEnabled = binding.scroll.scrollY == 0
         }
 
         binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(this, R.array.dormitory, R.layout.spinner_notice_dormitory)
@@ -67,7 +65,8 @@ class RewardActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-        selectedReward = mutableListOf()
+        selecteduserId = arrayListOf()
+        selectedStudent = arrayListOf()
         loadStudentData(token, "전체")
     }
 
@@ -79,16 +78,17 @@ class RewardActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<List<ResidentRequestResultDTO>>, response: Response<List<ResidentRequestResultDTO>>) {
                     Log.d("REWARD_REQUEST", "학생 리스트 조회 성공")
 
-                    //학생이 존재하지 않는 경우
+                    selecteduserId.clear()
+
+                    // 학생이 존재하지 않는 경우
                     if (response.body()?.size == 0) {
                         Log.d("REWARD_REQUEST", "학생 데이터 없음")
                     }
 
-                    //리사이클러뷰 어댑터 연결
+                    // 리사이클러뷰 어댑터 연결
                     val studentList: MutableList<ResidentRequestResultDTO> = mutableListOf()
 
                     for (info in response.body()!!) {
-                        // ★★★ 기숙사 추가
                         var student = ResidentRequestResultDTO(info.userId, info.name, info.dormitoryName, info.detailedAddress)
                         studentList.add(student)
                     }
