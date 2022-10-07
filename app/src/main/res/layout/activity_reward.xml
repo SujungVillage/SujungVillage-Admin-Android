@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RewardActivity">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_title"
         android:layout_width="0dp"
@@ -43,9 +42,8 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/layout_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +52,7 @@
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/text_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="38dp"
@@ -80,9 +78,11 @@
             android:popupBackground="@color/white"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/text_spinner"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_clear"
             android:layout_width="60dp"
             android:layout_height="24dp"
             android:layout_marginEnd="31dp"
@@ -92,27 +92,29 @@
             android:text="전체해제"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@id/layout_spinner">
 
         <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_student_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,10 +122,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_reward"
+                    android:id="@+id/recycler_student"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -131,31 +132,26 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/listitem_reward" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_manage"
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/style_rollclall_button_border"
-                    android:fontFamily="@font/bold"
-                    android:text="관리"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_reward"
-                    tools:ignore="TouchTargetSizeCheck" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_next"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/style_rollclall_button_border"
+        android:fontFamily="@font/bold"
+        android:text="다음"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

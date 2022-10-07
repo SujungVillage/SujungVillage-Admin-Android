@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class ResidentRequestResultDTO(
     @SerializedName("userId")
-    val userId: Long,
+    val userId: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("dormitoryName")
