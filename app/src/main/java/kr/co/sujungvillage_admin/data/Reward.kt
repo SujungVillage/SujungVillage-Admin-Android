@@ -12,10 +12,32 @@ data class ResidentRequestResultDTO(
     val dormitoryName: String,
     @SerializedName("detailedAddress")
     val detailedAddress: String,
-) : Serializable {}
+) : Serializable
 
 data class SelectedUser(
     val name: String,
     val userId: String,
     val dormitoryName: String,
-) : Serializable {}
+) : Serializable
+
+data class RewardCreateDTO(
+    @SerializedName("residentList")
+    val residentIds: List<String>,
+    @SerializedName("score")
+    val score: Long,
+    @SerializedName("reason")
+    val reason: String,
+) : Serializable
+
+data class RewardCreateResultDTO(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("userId")
+    val userId: String,
+    @SerializedName("score")
+    val score: Long,
+    @SerializedName("reason")
+    val reason: String,
+    @SerializedName("regDate")
+    val date: String,
+) : Serializable
