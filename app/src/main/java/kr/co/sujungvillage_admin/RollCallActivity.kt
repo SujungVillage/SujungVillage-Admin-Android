@@ -7,12 +7,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage_admin.adapter.RollcallAdapter
 import kr.co.sujungvillage_admin.data.RollcallChangeDTO
 import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
-import kr.co.sujungvillage_admin.databinding.ActivityCommWriteBinding
 import kr.co.sujungvillage_admin.databinding.ActivityRollCallBinding
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
@@ -52,44 +50,40 @@ class RollCallActivity : AppCompatActivity() {
 
         // 승인 버튼 연결
         binding.btnApprove.setOnClickListener {
-            for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "승인")).enqueue(object: Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        Log.d("ROLLCALL_APPROVE", "점호 승인 성공")
-                        Log.d("ROLLCALL_APPROVE", response.body().toString())
-                        Log.d("ROLLCALL_APPROVE", "code : " + response.code())
-                        Log.d("ROLLCALL_APPROVE", "message : " + response.message())
+            RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "승인")).enqueue(object: Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d("ROLLCALL_APPROVE", "점호 승인 성공")
+                    Log.d("ROLLCALL_APPROVE", response.body().toString())
+                    Log.d("ROLLCALL_APPROVE", "code : " + response.code())
+                    Log.d("ROLLCALL_APPROVE", "message : " + response.message())
 
-                        Toast.makeText(this@RollCallActivity, "승인되었습니다.", Toast.LENGTH_SHORT).show()
-                        loadRollcallData(token)
-                    }
+                    Toast.makeText(this@RollCallActivity, "승인되었습니다.", Toast.LENGTH_SHORT).show()
+                    loadRollcallData(token)
+                }
 
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Log.e("ROLLCALL_APPROVE", "점호 승인 실패")
-                        Log.e("ROLLCALL_APPROVE", t.message.toString())
-                    }
-                })
-            }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("ROLLCALL_APPROVE", "점호 승인 실패")
+                    Log.e("ROLLCALL_APPROVE", t.message.toString())
+                }
+            })
         }
 
         // 반려 버튼 연결
         binding.btnReject.setOnClickListener {
-            for (rollcall in selectedRollcall) {
-                RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "반려")).enqueue(object: Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        Log.d("ROLLCALL_REJECT", "점호 반려 성공")
-                        Log.d("ROLLCALL_REJECT", response.body().toString())
+            RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(selectedRollcall, "반려")).enqueue(object: Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d("ROLLCALL_REJECT", "점호 반려 성공")
+                    Log.d("ROLLCALL_REJECT", response.body().toString())
 
-                        Toast.makeText(this@RollCallActivity, "반려되었습니다.", Toast.LENGTH_SHORT).show()
-                        loadRollcallData(token)
-                    }
+                    Toast.makeText(this@RollCallActivity, "반려되었습니다.", Toast.LENGTH_SHORT).show()
+                    loadRollcallData(token)
+                }
 
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Log.e("ROLLCALL_REJECT", "점호 반려 실패")
-                        Log.e("ROLLCALL_REJECT", t.message.toString())
-                    }
-                })
-            }
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("ROLLCALL_REJECT", "점호 반려 실패")
+                    Log.e("ROLLCALL_REJECT", t.message.toString())
+                }
+            })
         }
     }
 

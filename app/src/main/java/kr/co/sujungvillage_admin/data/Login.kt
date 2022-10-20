@@ -15,4 +15,6 @@ data class LoginDTO(
 data class LoginResultDTO(
     @SerializedName("jwtToken")
     val token: String,
+    @SerializedName("refreshToken")
+    val refreshToken: String,
 ): Serializable {}
