@@ -7,57 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".RollCallActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="-20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/linear_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
-
-        <ScrollView
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false">
-
-            <LinearLayout
-                android:id="@+id/linear_rollcall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text_exist"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="30dp"
-                    android:fontFamily="@font/regular"
-                    android:text="대기 중인 점호가 없습니다."
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycle_rollcall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/listitem_rollcall" />
-            </LinearLayout>
-        </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_setting_user_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/style_rollcall_border">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -77,49 +34,67 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="47dp"
-            android:layout_marginBottom="41dp"
             android:fontFamily="@font/semi_bold"
             android:text="점호 확인"
             android:textColor="#FF111111"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="22dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle">
+
+            <TextView
+                android:id="@+id/text_current_rollcall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:paddingBottom="17dp"
+                android:text="현재 점호"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteY="70dp" />
+
+            <TextView
+                android:id="@+id/text_all_rollcall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/medium"
+                android:gravity="center"
+                android:paddingBottom="17dp"
+                android:text="이전 점호 내역"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteX="327dp"
+                tools:layout_editor_absoluteY="70dp" />
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+    <FrameLayout
+        android:id="@+id/frame_rollcall"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
-        <TextView
-            android:id="@+id/btn_approve"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:background="@drawable/style_comm_write_submit_border"
-            android:fontFamily="@font/bold"
-            android:gravity="center"
-            android:text="승인"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/btn_reject"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="50dp"
-            android:background="@drawable/style_comm_write_submit_border"
-            android:fontFamily="@font/bold"
-            android:gravity="center"
-            android:text="반려"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

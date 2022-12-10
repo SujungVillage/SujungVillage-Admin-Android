@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.ListFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage_admin.adapter.RollcallAdapter
@@ -16,6 +17,7 @@ import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.fragment.app.Fragment
 
 class RollCallActivity : AppCompatActivity() {
     val binding by lazy { ActivityRollCallBinding.inflate(layoutInflater) }
@@ -28,6 +30,15 @@ class RollCallActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setCurrentRollCallFragment()
+
+        binding.textCurrentRollcall.setOnClickListener{
+            setCurrentRollCallFragment()
+        }
+        binding.textAllRollcall.setOnClickListener{
+            setAllRollCallFragment()
+        }
+/*
         // 로컬에서 토큰 불러오기
         val shared = this.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
@@ -84,9 +95,9 @@ class RollCallActivity : AppCompatActivity() {
                     Log.e("ROLLCALL_REJECT", t.message.toString())
                 }
             })
-        }
+        }*/
     }
-
+/*
     // 점호 신청 리스트 불러오기 함수
     fun loadRollcallData(token: String) {
         // 대기 중인 점호 리스트 조회 API 연결
@@ -120,5 +131,13 @@ class RollCallActivity : AppCompatActivity() {
                 Log.e("ROLLCALL_LIST_REQUEST", t.message.toString())
             }
         })
+    }*/
+
+    private fun setAllRollCallFragment(){
+        supportFragmentManager.beginTransaction().replace(R.id.frame_rollcall,AllRollCall()).commit()
+    }
+    private fun setCurrentRollCallFragment(){
+        supportFragmentManager.beginTransaction().replace(R.id.frame_rollcall,CurrentRollCall()).commit()
+
     }
 }
