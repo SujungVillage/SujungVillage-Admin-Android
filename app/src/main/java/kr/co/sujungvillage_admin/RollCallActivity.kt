@@ -22,9 +22,9 @@ import androidx.fragment.app.Fragment
 class RollCallActivity : AppCompatActivity() {
     val binding by lazy { ActivityRollCallBinding.inflate(layoutInflater) }
 
-    companion object {
+    /*companion object {
         var selectedRollcall: MutableList<Long> = mutableListOf()
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
