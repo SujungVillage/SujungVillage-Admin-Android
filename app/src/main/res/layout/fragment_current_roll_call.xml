@@ -13,8 +13,11 @@
         <ScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@+id/linear_rollcall_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -41,16 +44,17 @@
                     tools:listitem="@layout/listitem_rollcall" />
             </LinearLayout>
         </ScrollView>
-
         <LinearLayout
+            android:id="@+id/linear_rollcall_btn"
             android:layout_width="match_parent"
             android:layout_height="96dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/scroll"
             android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:gravity="center">
+            app:layout_constraintStart_toStartOf="parent">
+
             <TextView
                 android:id="@+id/btn_approve"
                 android:layout_width="80dp"
@@ -74,6 +78,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

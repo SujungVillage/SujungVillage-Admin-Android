@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage_admin.R
-import kr.co.sujungvillage_admin.RollCallActivity.Companion.selectedRollcall
+import kr.co.sujungvillage_admin.CurrentRollCall.Companion.selectedRollcall
 import kr.co.sujungvillage_admin.base.toBitmap
 import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
 import kr.co.sujungvillage_admin.databinding.ListitemRollcallBinding
