@@ -1,64 +1,167 @@
 package kr.co.sujungvillage_admin
 
+import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
 import kr.co.sujungvillage_admin.databinding.FragmentAllRollCallBinding
-import kr.co.sujungvillage_admin.databinding.FragmentSettingBinding
+import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
+import java.util.*
+import retrofit2.Callback
+import kr.co.sujungvillage_admin.adapter.RollcallAdapter
+import kr.co.sujungvillage_admin.data.RollcallChangeDTO
+import retrofit2.Call
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AllRollCall.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AllRollCall : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
-
+    val binding by lazy { FragmentAllRollCallBinding.inflate(layoutInflater) }
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentAllRollCallBinding.inflate(inflater, container, false)
-//        val state=resources.getStringArray(R.array.rollcall_type)
-//        val adapter=ArrayAdapter(requireContext(),R.layout.spinner_notice_write_dormitory,state)
-//        binding.spinnerRollCall.adapter=adapter
+
+        // 로컬에서 토큰 불러오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val token = shared?.getString("token", "error").toString()
+
+
+        //날짜 받아오기
+        val myDate=SimpleDateFormat("yyyy-MM-dd")
+        val calendar= Calendar.getInstance()
+        val today=Date()
+        calendar.time=today
+        binding.txtDate.text="${myDate.format(calendar.time)}"
+
         binding.spinnerRollCall.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.rollcall_type, R.layout.spinner_notice_write_dormitory)
+        var state=binding.spinnerRollCall.selectedItem.toString()
+        loadAllRollCallData(token,myDate.format(calendar.time),state)
+
+        binding.spinnerRollCall.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                state=binding.spinnerRollCall.selectedItem.toString()
+                loadAllRollCallData(token,myDate.format(calendar.time),state)
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+        binding.btnYesterday.setOnClickListener{
+            calendar.add(Calendar.DATE, -1)//하루 전
+            binding.txtDate.text="${myDate.format(calendar.time)}"
+            //스피너값 초기화
+            binding.spinnerRollCall.setSelection(0)
+            state=binding.spinnerRollCall.selectedItem.toString()
+            loadAllRollCallData(token,myDate.format(calendar.time),state)
+        }
+        binding.btnTomorrow.setOnClickListener{
+            calendar.add(Calendar.DATE, 1)//하루 후
+            binding.txtDate.text="${myDate.format(calendar.time)}"
+            //스피너값 초기화
+            binding.spinnerRollCall.setSelection(0)
+            state=binding.spinnerRollCall.selectedItem.toString()
+            loadAllRollCallData(token,myDate.format(calendar.time),state)
+        }
+        // 승인 버튼 연결
+        binding.btnApprove.setOnClickListener {
+            RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(CurrentRollCall.selectedRollcall, "승인")).enqueue(object: Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d("A_ROLLCALL_APPROVE", "점호 승인 성공")
+                    Log.d("A_ROLLCALL_APPROVE", response.body().toString())
+                    Log.d("A_ROLLCALL_APPROVE", "code : " + response.code())
+                    Log.d("A_ROLLCALL_APPROVE", "message : " + response.message())
+
+                    Toast.makeText(activity, "승인되었습니다.", Toast.LENGTH_SHORT).show()
+                    loadAllRollCallData(token,myDate.format(calendar.time),state)
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("A_ROLLCALL_APPROVE", "점호 승인 실패")
+                    Log.e("A_ROLLCALL_APPROVE", t.message.toString())
+                }
+            })
+        }
+        // 반려 버튼 연결
+        binding.btnReject.setOnClickListener {
+            RetrofitBuilder.rollcallApi.rollcallChange(token, RollcallChangeDTO(CurrentRollCall.selectedRollcall, "반려")).enqueue(object: Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d("C_ROLLCALL_REJECT", "점호 반려 성공")
+                    Log.d("C_ROLLCALL_REJECT", response.body().toString())
+
+                    Toast.makeText(activity, "반려되었습니다.", Toast.LENGTH_SHORT).show()
+                    loadAllRollCallData(token,myDate.format(calendar.time),state)
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.e("C_ROLLCALL_REJECT", "점호 반려 실패")
+                    Log.e("C_ROLLCALL_REJECT", t.message.toString())
+                }
+            })
+        }
+
         return binding.root
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AllRollCall.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AllRollCall().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun loadAllRollCallData(token:String,date:String, state:String){
+        Log.d("TEST",date)
+        Log.d("TEST",state)
+        RetrofitBuilder.rollcallApi.rollcallGetList(token,date,state).enqueue(object: Callback<List<RollcallGetListResultDTO>>{
+            override fun onResponse(call: Call<List<RollcallGetListResultDTO>>, response: Response<List<RollcallGetListResultDTO>>) {
+                Log.d("A_ROLLCALL_LIST_REQUEST", "점호 신청 리스트 조회 성공")
+                // 선택 점호 초기화
+                CurrentRollCall.selectedRollcall.clear()
+                if (response.body()?.size == 0) {
+                    binding.textExist.visibility = View.VISIBLE
+                } else {
+                    binding.textExist.visibility = View.GONE
+                }
+                if(response.isSuccessful) {
+                    var rollcallList: MutableList<RollcallGetListResultDTO> = mutableListOf()
+                    for (info in response.body()!!) {
+                        Log.d("A_ROLLCALL_LIST_REQUEST", info.state)
+                        rollcallList.add(
+                            RollcallGetListResultDTO(
+                                info.id,
+                                info.userId,
+                                info.userName,
+                                info.dormitory,
+                                info.address,
+                                info.image,
+                                info.location,
+                                info.date,
+                                info.state
+                            )
+                        )
+                    }
+                    val adapter = RollcallAdapter()
+                    adapter.rollcallList = rollcallList
+                    binding.recycleRollcall.adapter = adapter
+                    binding.recycleRollcall.layoutManager = LinearLayoutManager(activity)
+                }
+                else{
+                    Log.d("A_ROLLCALL_LIST_REQUEST",response.toString())
+                    Log.d("A_ROLLCALL_LIST_REQUEST",response.message())
+                    Log.d("A_ROLLCALL_LIST_REQUEST",response.body().toString())
+                    Log.d("A_ROLLCALL_LIST_REQUEST",response.code().toString())
                 }
             }
+
+            override fun onFailure(call: Call<List<RollcallGetListResultDTO>>, t: Throwable) {
+                Log.e("A_ROLLCALL_LIST_REQUEST", "점호 신청 리스트 조회 실패")
+                Log.e("A_ROLLCALL_LIST_REQUEST", t.message.toString())
+            }
+
+        })
     }
+
 }

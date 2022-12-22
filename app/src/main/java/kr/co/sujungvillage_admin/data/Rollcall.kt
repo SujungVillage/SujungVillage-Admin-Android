@@ -61,3 +61,4 @@ data class RollcallChangeDTO(
     @SerializedName("state")
     val state: String,
 ): Serializable {}
+
