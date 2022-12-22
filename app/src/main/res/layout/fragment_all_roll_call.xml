@@ -5,117 +5,162 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AllRollCall">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@+id/linear_rollcall_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="38dp">
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/nothing"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_rollcall_left"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/medium"
-                    android:text="2000.01.01"
-                    android:textColor="@color/black"
-                    android:textSize="14dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginStart="20dp"
-                    android:background="@color/nothing"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_rollcall_right"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="17dp">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/regular"
-                    android:textSize="14dp"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="38dp"
-                    android:text="점호 상태 선택" />
-
-                <Spinner
-                    android:id="@+id/spinner_roll_call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    tools:entries="@array/rollcall_type"
-                    tools:ignore="TouchTargetSizeCheck" />
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="15dp"
-                    android:background="@color/nothing"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_notice_spinner"
-                    android:layout_marginTop="5dp"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
->
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/linear_rollcall"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="38dp">
+                    <ImageButton
+                        android:id="@+id/btn_yesterday"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/nothing"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_rollcall_left"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="parent" />
                     <TextView
-                        android:id="@+id/text_exist"
-                        android:layout_width="match_parent"
+                        android:id="@+id/txt_date"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="30dp"
-                        android:fontFamily="@font/regular"
-                        android:text="점호가 없습니다."
-                        android:textAlignment="center"
-                        android:textSize="14sp"
-                        android:visibility="gone" />
+                        android:fontFamily="@font/medium"
+                        android:text="0000.00.00"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycle_rollcall"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/listitem_rollcall" />
+
+                    <ImageButton
+                        android:id="@+id/btn_tomorrow"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="20dp"
+                        android:background="@color/nothing"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_rollcall_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="17dp">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="38dp"
+                        android:text="점호 상태 선택" />
+
+                    <Spinner
+                        android:id="@+id/spinner_roll_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@null"
+                        tools:entries="@array/rollcall_type"
+                        tools:ignore="TouchTargetSizeCheck" />
+                    <ImageView
+                        android:layout_width="11dp"
+                        android:layout_height="15dp"
+                        android:background="@color/nothing"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_notice_spinner"
+                        android:layout_marginTop="5dp"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    >
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/linear_rollcall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_exist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="30dp"
+                            android:fontFamily="@font/regular"
+                            android:text="점호가 없습니다."
+                            android:textAlignment="center"
+                            android:textSize="14sp"
+                            android:visibility="gone" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycle_rollcall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:listitem="@layout/listitem_rollcall" />
+                    </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/linear_rollcall_btn"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/btn_approve"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:background="@drawable/style_comm_write_submit_border"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:text="승인"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btn_reject"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/style_comm_write_submit_border"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:text="반려"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
-</ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
