@@ -24,6 +24,9 @@ class FAQWriteActivity : AppCompatActivity() {
         val token = shared?.getString("token", "error").toString()
         var dormitory = shared?.getString("dormitory", "error").toString()
 
+        // 뒤로가기 버튼 연결
+        binding.btnBack.setOnClickListener { finish() }
+
         binding.btnUpload.setOnClickListener {
             // 버튼 클릭시 제목과 내용 받아오기.
             val question = binding.editTitle.text.toString().trim() // 앞뒤 공백 제거

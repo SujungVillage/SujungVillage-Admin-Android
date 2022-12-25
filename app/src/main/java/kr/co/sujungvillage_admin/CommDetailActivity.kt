@@ -138,31 +138,18 @@ class CommDetailActivity : AppCompatActivity() {
                         commentIndex = mutableListOf()
 
                         binding.textTitle.text = response.body()?.title
-                        binding.textCalDate.text = "${
-                        response.body()?.regDate?.subSequence(
-                            0,
-                            4
-                        )
-                        }/${
-                        response.body()?.regDate?.subSequence(
-                            5,
-                            7
-                        )
-                        }/${
-                        response.body()?.regDate?.subSequence(
-                            8,
-                            10
-                        )
-                        } ${
-                        response.body()?.regDate?.subSequence(11, 13)
-                        }:${response.body()?.regDate?.subSequence(14, 16)}"
+                        binding.textCalDate.text = "${response.body()?.regDate?.subSequence(0, 4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11, 13)}:${response.body()?.regDate?.subSequence(14, 16)}"
                         binding.textContent.text = response.body()?.content
 
                         // 관리자이면 관리자 마크 보이게
-                        postWriterId = response.body()?.writerId.toString().toInt()
-                        if (response.body()?.writerId.toString().toInt() >= 99990000) { // 관리자인 경우
-                            binding.textAdmin.visibility = View.VISIBLE
-                        }
+                        try {
+                            postWriterId = response.body()?.writerId.toString().toInt()
+                            if (response.body()?.writerId.toString()
+                                    .toInt() >= 99990000
+                            ) { // 관리자인 경우
+                                binding.textAdmin.visibility = View.VISIBLE
+                            }
+                        } catch (e: NumberFormatException) { }
 
                         // 글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
                         if (studentNum == response.body()?.writerId) {
@@ -175,7 +162,7 @@ class CommDetailActivity : AppCompatActivity() {
                         for (info in response.body()?.comments!!) {
                             commentCount++
                             if (!commentIndex?.contains(info.writerId)!!) commentIndex!!.add(info.writerId)
-                            var comment = CommDetailCommentsRequest(
+                            val comment = CommDetailCommentsRequest(
                                 info.id,
                                 info.postId,
                                 info.writerId,
@@ -185,7 +172,7 @@ class CommDetailActivity : AppCompatActivity() {
                             )
                             commentList.add(comment)
                         }
-                        var adapter = CommDetailAdapter(this@CommDetailActivity)
+                        val adapter = CommDetailAdapter(this@CommDetailActivity)
                         adapter.commDetailList = commentList
                         binding.recyclerComment.adapter = adapter
                         binding.recyclerComment.layoutManager =
