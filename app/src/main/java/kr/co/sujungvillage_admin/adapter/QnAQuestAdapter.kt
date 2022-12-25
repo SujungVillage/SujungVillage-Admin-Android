@@ -34,7 +34,8 @@ class QnAMyqHolder(val binding: ListitemQnaMyqBinding) : RecyclerView.ViewHolder
     fun setQuestion(question: QuestionGetResultDTO) {
         binding.textTitle.text = question.title
         binding.textState.text = if (question.isAnswered) "답변 완료" else "미답변"
-        if (!question.isAnswered) binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_incomplete)
+        if (question.isAnswered) binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_complete)
+        else binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_incomplete)
 
         // 내 질문 클릭 시 상세 액티비티 생성
         binding.root.setOnClickListener {

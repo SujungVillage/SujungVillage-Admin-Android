@@ -13,6 +13,9 @@ class RollCallActivity : AppCompatActivity() {
         binding.textCurrentRollcall.setBackgroundResource(R.drawable.style_rollcall_tab)
         setCurrentRollCallFragment()
 
+        // 뒤로가기 버튼 연결
+        binding.btnBack.setOnClickListener { finish() }
+
         binding.textCurrentRollcall.setOnClickListener {
             binding.textCurrentRollcall.setBackgroundResource(R.drawable.style_rollcall_tab)
             binding.textAllRollcall.setBackgroundResource(0)
