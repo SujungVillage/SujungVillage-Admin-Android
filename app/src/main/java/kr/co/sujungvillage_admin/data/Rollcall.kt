@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.data
+package kr.co.sujungvillage_admin.data // ktlint-disable package-name
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -9,10 +9,10 @@ data class RollcallGetDateResultDTO(
     @SerializedName("start")
     val start: String,
     @SerializedName("end")
-    val end : String,
+    val end: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class RollcallCreateDTO(
     @SerializedName("startDateTime")
@@ -20,8 +20,8 @@ data class RollcallCreateDTO(
     @SerializedName("endDateTime")
     val end: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class RollcallCreateResultDTO(
     @SerializedName("id")
@@ -31,8 +31,8 @@ data class RollcallCreateResultDTO(
     @SerializedName("end")
     val end: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class RollcallGetListResultDTO(
     @SerializedName("id")
@@ -52,13 +52,12 @@ data class RollcallGetListResultDTO(
     @SerializedName("rollcallDateTime")
     val date: String,
     @SerializedName("state")
-    val state: String,
-): Serializable {}
+    val state: String
+) : Serializable
 
 data class RollcallChangeDTO(
     @SerializedName("rollcallIds")
     val id: List<Long>,
     @SerializedName("state")
-    val state: String,
-): Serializable {}
-
+    val state: String
+) : Serializable

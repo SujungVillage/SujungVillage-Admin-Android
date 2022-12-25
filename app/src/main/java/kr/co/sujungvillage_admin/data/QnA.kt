@@ -1,19 +1,19 @@
-package kr.co.sujungvillage_admin.data
+package kr.co.sujungvillage_admin.data // ktlint-disable package-name
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-//QNA답변
+// QNA답변
 data class QnaAnswerDTO(
     @SerializedName("questionId")
     val question: Long,
     @SerializedName("content")
-    val content:String
-):Serializable{}
+    val content: String
+) : Serializable
 
 data class QnaAnswerResultDTO(
     @SerializedName("id")
-    val id:Long,
+    val id: Long,
     @SerializedName("writerId")
     val writerId: String,
     @SerializedName("content")
@@ -22,35 +22,34 @@ data class QnaAnswerResultDTO(
     val regDate: String,
     @SerializedName("modDate")
     val modDate: String
-):Serializable{}
+) : Serializable
 
-//FAQ 작성
+// FAQ 작성
 data class FaqWriteRequestDTO(
     @SerializedName("question")
-    val question:String,
+    val question: String,
     @SerializedName("answer")
-    val answer:String,
+    val answer: String,
     @SerializedName("dormitoryName")
-    val dormitory:String
-):Serializable{}
+    val dormitory: String
+) : Serializable
 
 data class FaqWriteResultDTO(
     @SerializedName("id")
-    val id:Long,
+    val id: Long,
     @SerializedName("writerId")
-    val writerId:String,
+    val writerId: String,
     @SerializedName("question")
-    val question:String,
+    val question: String,
     @SerializedName("answer")
-    val answer:String,
+    val answer: String,
     @SerializedName("dormitoryName")
-    val dormitory:String,
+    val dormitory: String,
     @SerializedName("regDate")
-    val regDate:String,
+    val regDate: String,
     @SerializedName("modDate")
     val modDate: String
-):Serializable{}
-
+) : Serializable
 
 data class FaqGetResultDTO(
     @SerializedName("id")
@@ -64,15 +63,15 @@ data class FaqGetResultDTO(
     @SerializedName("regDate")
     val date: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class MyqDetailGetResultDTO(
     @SerializedName("question")
     val question: QnAQuestion,
     @SerializedName("answer")
-    val answer: QnAAnswer,
-): Serializable {}
+    val answer: QnAAnswer
+) : Serializable
 
 data class QnAQuestion(
     @SerializedName("id")
@@ -90,8 +89,8 @@ data class QnAQuestion(
     @SerializedName("reqDate")
     val reqDate: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class QnAAnswer(
     @SerializedName("id")
@@ -103,8 +102,8 @@ data class QnAAnswer(
     @SerializedName("regDate")
     val regDate: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class QuestionGetResultDTO(
     @SerializedName("questionId")
@@ -115,4 +114,4 @@ data class QuestionGetResultDTO(
     val date: String,
     @SerializedName("answered")
     val isAnswered: Boolean
-): Serializable {}
+) : Serializable

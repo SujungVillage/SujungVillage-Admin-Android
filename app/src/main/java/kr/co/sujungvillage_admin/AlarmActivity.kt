@@ -1,8 +1,8 @@
-package kr.co.sujungvillage_admin
+package kr.co.sujungvillage_admin // ktlint-disable package-name
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.sujungvillage_admin.adapter.ViewPagerAdapter
 import kr.co.sujungvillage_admin.databinding.ActivityAlarmBinding

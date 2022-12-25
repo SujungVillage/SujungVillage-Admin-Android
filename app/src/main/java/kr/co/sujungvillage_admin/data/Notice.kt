@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.data
+package kr.co.sujungvillage_admin.data // ktlint-disable package-name
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -11,8 +11,8 @@ data class NoticeRequestResultDTO(
     @SerializedName("dormitoryName")
     val dormitroy: String,
     @SerializedName("regDate")
-    val date: String,
-): Serializable {}
+    val date: String
+) : Serializable
 
 data class NoticeDetailResultDTO(
     @SerializedName("id")
@@ -28,8 +28,8 @@ data class NoticeDetailResultDTO(
     @SerializedName("modDate")
     val modDate: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class NoticeCreateDTO(
     @SerializedName("title")
@@ -37,8 +37,8 @@ data class NoticeCreateDTO(
     @SerializedName("content")
     val content: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class NoticeCreateResultDTO(
     @SerializedName("id")
@@ -54,5 +54,5 @@ data class NoticeCreateResultDTO(
     @SerializedName("modDate")
     val modDate: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable

@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.api
+package kr.co.sujungvillage_admin.api // ktlint-disable package-name
 
 import kr.co.sujungvillage_admin.data.LoginDTO
 import kr.co.sujungvillage_admin.data.LoginResultDTO

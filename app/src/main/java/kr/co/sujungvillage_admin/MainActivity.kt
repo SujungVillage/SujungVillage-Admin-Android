@@ -1,7 +1,7 @@
-package kr.co.sujungvillage_admin
+package kr.co.sujungvillage_admin // ktlint-disable package-name
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kr.co.sujungvillage_admin.databinding.ActivityMainBinding
 import kr.co.sujungvillage_admin.fragment.CommFragment
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationBar.itemIconTintList = null // 아이콘 색상 그대로 유지
         binding.navigationBar.run {
             setOnNavigationItemSelectedListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.home -> {
                         changeFragment(fragmentHome)
                     }

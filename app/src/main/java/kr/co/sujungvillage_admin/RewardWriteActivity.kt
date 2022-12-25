@@ -1,10 +1,10 @@
-package kr.co.sujungvillage_admin
+package kr.co.sujungvillage_admin // ktlint-disable package-name
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage_admin.RewardActivity.Companion.selecteduserId
 import kr.co.sujungvillage_admin.adapter.RewardSelectedAdapter
@@ -66,8 +66,14 @@ class RewardWriteActivity : AppCompatActivity() {
             var point = binding.editPoint.text.toString().toLong()
             if (binding.radioPenalty.isChecked) point *= -1
             val reason = binding.editReason.text.toString()
-            RetrofitBuilder.rewardApi.rewardCreate(token, RewardCreateDTO(selecteduserId, point, reason)).enqueue(object : Callback<List<RewardCreateResultDTO>> {
-                override fun onResponse(call: Call<List<RewardCreateResultDTO>>, response: Response<List<RewardCreateResultDTO>>) {
+            RetrofitBuilder.rewardApi.rewardCreate(
+                token,
+                RewardCreateDTO(selecteduserId, point, reason)
+            ).enqueue(object : Callback<List<RewardCreateResultDTO>> {
+                override fun onResponse(
+                    call: Call<List<RewardCreateResultDTO>>,
+                    response: Response<List<RewardCreateResultDTO>>
+                ) {
                     Log.d("REWARD_CREATE", "상벌점 부여 성공")
 
                     showToast("상벌점이 부여되었습니다.")
