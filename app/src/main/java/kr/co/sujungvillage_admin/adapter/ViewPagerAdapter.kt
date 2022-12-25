@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.adapter
+package kr.co.sujungvillage_admin.adapter // ktlint-disable package-name
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -10,8 +10,7 @@ import kr.co.sujungvillage_admin.fragment.AlarmCommFragment
 private const val NUM_TABS = 2
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fragmentManager,lifecycle) {
-
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
         return NUM_TABS

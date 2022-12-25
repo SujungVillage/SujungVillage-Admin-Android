@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.base
+package kr.co.sujungvillage_admin.base // ktlint-disable filename // ktlint-disable package-name
 
 import android.content.Context
 import android.view.View

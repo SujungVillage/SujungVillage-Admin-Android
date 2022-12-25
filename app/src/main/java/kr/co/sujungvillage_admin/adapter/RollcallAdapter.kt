@@ -1,20 +1,20 @@
-package kr.co.sujungvillage_admin.adapter
+package kr.co.sujungvillage_admin.adapter // ktlint-disable package-name
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.CurrentRollCall.Companion.selectedRollcall
+import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.base.toBitmap
 import kr.co.sujungvillage_admin.data.RollcallGetListResultDTO
 import kr.co.sujungvillage_admin.databinding.ListitemRollcallBinding
 
 class RollcallAdapter : RecyclerView.Adapter<RollcallHolder>() {
-    var rollcallList= mutableListOf<RollcallGetListResultDTO>()
+    var rollcallList = mutableListOf<RollcallGetListResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RollcallHolder {
-        val binding = ListitemRollcallBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemRollcallBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RollcallHolder(binding)
     }
 
@@ -28,7 +28,7 @@ class RollcallAdapter : RecyclerView.Adapter<RollcallHolder>() {
     }
 }
 
-class RollcallHolder(val binding: ListitemRollcallBinding): RecyclerView.ViewHolder(binding.root) {
+class RollcallHolder(val binding: ListitemRollcallBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setRollcall(rollcall: RollcallGetListResultDTO) {
         binding.imgRollcall.setImageBitmap(rollcall.image.toBitmap())
         binding.textName.text = "이름 : ${rollcall.userName}"

@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.adapter
+package kr.co.sujungvillage_admin.adapter // ktlint-disable package-name
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,8 @@ class RewardSelectedAdapter : RecyclerView.Adapter<RewardSelectedHolder>() {
     var studentList = mutableListOf<SelectedUser>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RewardSelectedHolder {
-        val binding = ListitemRewardWriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemRewardWriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RewardSelectedHolder(binding)
     }
 
@@ -24,7 +25,8 @@ class RewardSelectedAdapter : RecyclerView.Adapter<RewardSelectedHolder>() {
     }
 }
 
-class RewardSelectedHolder(val binding: ListitemRewardWriteBinding) : RecyclerView.ViewHolder(binding.root) {
+class RewardSelectedHolder(val binding: ListitemRewardWriteBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun setStudent(student: SelectedUser) {
         binding.textName.text = student.name
         binding.textId.text = student.userId

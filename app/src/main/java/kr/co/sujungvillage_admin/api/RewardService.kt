@@ -1,10 +1,10 @@
-package kr.co.sujungvillage_admin.api
+package kr.co.sujungvillage_admin.api // ktlint-disable package-name
 
 import kr.co.sujungvillage_admin.data.ResidentRequestResultDTO
 import kr.co.sujungvillage_admin.data.RewardCreateDTO
 import kr.co.sujungvillage_admin.data.RewardCreateResultDTO
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.* // ktlint-disable no-wildcard-imports
 
 interface RewardService {
     // 학생 리스트 조회
@@ -18,6 +18,6 @@ interface RewardService {
     @POST("/api/admin/lmp/addLMP")
     fun rewardCreate(
         @Header("jwt_token") token: String,
-        @Body() rewardInfo: RewardCreateDTO,
+        @Body() rewardInfo: RewardCreateDTO
     ): Call<List<RewardCreateResultDTO>>
 }

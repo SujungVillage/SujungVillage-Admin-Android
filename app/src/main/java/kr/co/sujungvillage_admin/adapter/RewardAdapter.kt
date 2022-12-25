@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.adapter
+package kr.co.sujungvillage_admin.adapter // ktlint-disable package-name
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,8 @@ class RewardAdapter : RecyclerView.Adapter<RewardHolder>() {
     var studentList = mutableListOf<ResidentRequestResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RewardHolder {
-        val binding = ListitemRewardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemRewardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RewardHolder(binding)
     }
 
@@ -29,7 +30,7 @@ class RewardAdapter : RecyclerView.Adapter<RewardHolder>() {
 }
 
 class RewardHolder(val binding: ListitemRewardBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun setStudent(student: ResidentRequestResultDTO ) {
+    fun setStudent(student: ResidentRequestResultDTO) {
         binding.userName.text = "${student.name}"
         binding.userId.text = "${student.userId}"
         binding.userDormitory.text = "${student.dormitoryName} ${student.detailedAddress}"
@@ -47,11 +48,16 @@ class RewardHolder(val binding: ListitemRewardBinding) : RecyclerView.ViewHolder
             }
             // 선택되지 않은 학생인 경우
             else {
-                selectedStudent.add(SelectedUser(student.name, student.userId, "${student.dormitoryName} ${student.detailedAddress}"))
+                selectedStudent.add(
+                    SelectedUser(
+                        student.name,
+                        student.userId,
+                        "${student.dormitoryName} ${student.detailedAddress}"
+                    )
+                )
                 selecteduserId.add(student.userId)
                 binding.layout.setBackgroundResource(R.drawable.style_reward_item_selected)
             }
         }
     }
-
 }

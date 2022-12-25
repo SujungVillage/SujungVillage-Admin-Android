@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.retrofit
+package kr.co.sujungvillage_admin.data // ktlint-disable package-name
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -7,8 +7,8 @@ data class HomeInfoResultDTO(
     @SerializedName("adminInfoDTO")
     val adminInfo: HomeAdminInfo,
     @SerializedName("rollcallDays")
-    val rollcallDays: List<HomeDay>,
-): Serializable {}
+    val rollcallDays: List<HomeDay>
+) : Serializable
 
 data class HomeAdminInfo(
     @SerializedName("name")
@@ -16,12 +16,12 @@ data class HomeAdminInfo(
     @SerializedName("dormitoryName")
     val dormitory: String,
     @SerializedName("detailedAddress")
-    val description: String,
-): Serializable {}
+    val description: String
+) : Serializable
 
 data class HomeDay(
     @SerializedName("id")
     val id: Long,
     @SerializedName("day")
-    val day: Int,
-): Serializable {}
+    val day: Int
+) : Serializable

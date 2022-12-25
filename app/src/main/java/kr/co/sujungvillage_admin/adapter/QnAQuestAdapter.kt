@@ -1,4 +1,4 @@
-package kr.co.sujungvillage_admin.adapter
+package kr.co.sujungvillage_admin.adapter // ktlint-disable package-name
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,11 +10,12 @@ import kr.co.sujungvillage_admin.R
 import kr.co.sujungvillage_admin.data.QuestionGetResultDTO
 import kr.co.sujungvillage_admin.databinding.ListitemQnaMyqBinding
 
-class QnAQuestionAdapter: RecyclerView.Adapter<QnAMyqHolder>() {
+class QnAQuestionAdapter : RecyclerView.Adapter<QnAMyqHolder>() {
     var questionList = mutableListOf<QuestionGetResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QnAMyqHolder {
-        val binding = ListitemQnaMyqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemQnaMyqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return QnAMyqHolder(binding)
     }
@@ -29,11 +30,12 @@ class QnAQuestionAdapter: RecyclerView.Adapter<QnAMyqHolder>() {
     }
 }
 
-class QnAMyqHolder(val binding: ListitemQnaMyqBinding): RecyclerView.ViewHolder(binding.root) {
+class QnAMyqHolder(val binding: ListitemQnaMyqBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setQuestion(question: QuestionGetResultDTO) {
         binding.textTitle.text = question.title
         binding.textState.text = if (question.isAnswered) "답변 완료" else "미답변"
-        if (!question.isAnswered) binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_incomplete)
+        if (question.isAnswered) binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_complete)
+        else binding.textState.setBackgroundResource(R.drawable.style_qna_listitem_incomplete)
 
         // 내 질문 클릭 시 상세 액티비티 생성
         binding.root.setOnClickListener {

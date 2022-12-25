@@ -1,8 +1,8 @@
-package kr.co.sujungvillage_admin.retrofit
+package kr.co.sujungvillage_admin.retrofit // ktlint-disable package-name
 
 import com.google.gson.GsonBuilder
 import kr.co.sujungvillage_admin.BuildConfig.BASE_URL
-import kr.co.sujungvillage_admin.api.*
+import kr.co.sujungvillage_admin.api.* // ktlint-disable no-wildcard-imports
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

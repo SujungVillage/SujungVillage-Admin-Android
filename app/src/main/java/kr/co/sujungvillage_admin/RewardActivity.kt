@@ -1,14 +1,14 @@
-package kr.co.sujungvillage_admin
+package kr.co.sujungvillage_admin // ktlint-disable package-name
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage_admin.adapter.RewardAdapter
 import kr.co.sujungvillage_admin.data.ResidentRequestResultDTO
@@ -55,10 +55,20 @@ class RewardActivity : AppCompatActivity() {
             loadStudentData(token, binding.spinnerDormitory.selectedItem.toString())
         }
 
-        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(this, R.array.dormitory, R.layout.spinner_notice_dormitory)
+        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.dormitory,
+            R.layout.spinner_notice_dormitory
+        )
 
-        binding.spinnerDormitory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        binding.spinnerDormitory.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
                     loadStudentData(token, binding.spinnerDormitory.selectedItem.toString())
                 }
 
@@ -70,12 +80,14 @@ class RewardActivity : AppCompatActivity() {
         loadStudentData(token, "전체")
     }
 
-
     fun loadStudentData(token: String, dormitory: String) {
         // 학생 리스트 조회 API 연결
         RetrofitBuilder.rewardApi.studentRequest(token, dormitory)
             .enqueue(object : Callback<List<ResidentRequestResultDTO>> {
-                override fun onResponse(call: Call<List<ResidentRequestResultDTO>>, response: Response<List<ResidentRequestResultDTO>>) {
+                override fun onResponse(
+                    call: Call<List<ResidentRequestResultDTO>>,
+                    response: Response<List<ResidentRequestResultDTO>>
+                ) {
                     Log.d("REWARD_REQUEST", "학생 리스트 조회 성공")
 
                     selecteduserId.clear()
@@ -89,7 +101,12 @@ class RewardActivity : AppCompatActivity() {
                     val studentList: MutableList<ResidentRequestResultDTO> = mutableListOf()
 
                     for (info in response.body()!!) {
-                        var student = ResidentRequestResultDTO(info.userId, info.name, info.dormitoryName, info.detailedAddress)
+                        var student = ResidentRequestResultDTO(
+                            info.userId,
+                            info.name,
+                            info.dormitoryName,
+                            info.detailedAddress
+                        )
                         studentList.add(student)
                     }
                     var adapter = RewardAdapter()
@@ -101,9 +118,12 @@ class RewardActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<List<ResidentRequestResultDTO>>, t: Throwable) {
                     Log.d("REWARD_REQUEST", "학생 리스트 조회 실패")
                     Log.d("REWARD_REQUEST", t.message.toString())
-                    Toast.makeText(this@RewardActivity, "학생 리스트 조회 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@RewardActivity,
+                        "학생 리스트 조회 오류가 발생하였습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
     }
 }
-

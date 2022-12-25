@@ -1,6 +1,6 @@
-package kr.co.sujungvillage_admin.api
+package kr.co.sujungvillage_admin.api // ktlint-disable package-name
 
-import kr.co.sujungvillage_admin.retrofit.HomeInfoResultDTO
+import kr.co.sujungvillage_admin.data.HomeInfoResultDTO
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -12,6 +12,6 @@ interface HomeService {
     fun homeInfo(
         @Header("jwt_token") token: String,
         @Query("year") year: String,
-        @Query("month") month: String,
+        @Query("month") month: String
     ): Call<HomeInfoResultDTO>
 }

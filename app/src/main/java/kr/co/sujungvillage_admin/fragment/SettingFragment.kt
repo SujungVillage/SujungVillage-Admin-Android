@@ -1,21 +1,20 @@
-package kr.co.sujungvillage_admin.fragment
+package kr.co.sujungvillage_admin.fragment // ktlint-disable package-name
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage_admin.AlarmActivity
 import kr.co.sujungvillage_admin.LoginActivity
-import kr.co.sujungvillage_admin.R
+import kr.co.sujungvillage_admin.data.HomeInfoResultDTO
 import kr.co.sujungvillage_admin.databinding.FragmentSettingBinding
-import kr.co.sujungvillage_admin.retrofit.HomeInfoResultDTO
 import kr.co.sujungvillage_admin.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,11 +22,16 @@ import retrofit2.Response
 
 class SettingFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentSettingBinding.inflate(inflater, container, false)
 
         //  토큰 불러오기
-        val shared = this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
+        val shared =
+            this.activity?.getSharedPreferences("SujungVillage_Admin", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
         val read = shared?.getBoolean("alarmRead", true)
 
@@ -45,7 +49,7 @@ class SettingFragment : Fragment() {
         }
 
         // 알람 버튼 초기화
-        if(shared!!.getBoolean("alarm", true)) {
+        if (shared!!.getBoolean("alarm", true)) {
             binding.switchAlarm.isChecked = true
         }
 
@@ -59,7 +63,8 @@ class SettingFragment : Fragment() {
 
         // 성신 포탈 버튼 연결
         binding.layoutPortal.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://portal.sungshin.ac.kr/sso/login.jsp"))
+            var intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://portal.sungshin.ac.kr/sso/login.jsp"))
             startActivity(intent)
         }
         // 앱 사용법 버튼 연결
@@ -86,16 +91,24 @@ class SettingFragment : Fragment() {
         }
 
         // 설정 화면 정보 조회 API 연결 (홈 화면 정보 조회 API 활용)
-        RetrofitBuilder.homeApi.homeInfo(token, CalendarDay.today().year.toString(), CalendarDay.today().month.toString()).enqueue(object : Callback<HomeInfoResultDTO> {
-            override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
+        RetrofitBuilder.homeApi.homeInfo(
+            token,
+            CalendarDay.today().year.toString(),
+            CalendarDay.today().month.toString()
+        ).enqueue(object : Callback<HomeInfoResultDTO> {
+            override fun onResponse(
+                call: Call<HomeInfoResultDTO>,
+                response: Response<HomeInfoResultDTO>
+            ) {
                 Log.d("HOME_INFO", "설정 화면 정보 조회 성공")
                 Log.d("HOME_INFO", "user : " + response.body()?.adminInfo.toString())
 
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.adminInfo?.name
-                if (response.body()?.adminInfo?.dormitory == "전체" && response.body()?.adminInfo?.description == "전체")
+                if (response.body()?.adminInfo?.dormitory == "전체" && response.body()?.adminInfo?.description == "전체") {
                     binding.textCharge.text = "담당 : " + response.body()?.adminInfo?.dormitory
-                else binding.textCharge.text = "담당 : " + response.body()?.adminInfo?.dormitory + " " + response.body()?.adminInfo?.description
+                } else binding.textCharge.text =
+                    "담당 : " + response.body()?.adminInfo?.dormitory + " " + response.body()?.adminInfo?.description
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
