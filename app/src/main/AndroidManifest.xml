@@ -25,16 +25,16 @@
             android:exported="false" />
         <activity
             android:name=".NoticeDetailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RewardActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RewardWriteActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".SplashActivity"
@@ -47,27 +47,27 @@
         </activity>
         <activity
             android:name=".NoticeWriteActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".RollCallActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".AlarmActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".NoticeActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CommDetailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CommWriteActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
 
         <!-- FCM service 추가 -->
         <service
